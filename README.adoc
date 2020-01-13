@@ -17,6 +17,17 @@ An end-to-end https://www.optaplanner.org/[OptaPlanner] web application ready to
 
 See https://www.youtube.com/watch?v=sOWC4qrXxFk[the video demo].
 
+== Demo
+
+Install Docker and run the following on the command line:
+
+[source,shell]
+----
+docker build -t rostering .
+docker run -p 8080:8080 --rm -it -e SPRING_PROFILES_ACTIVE=dev rostering
+----
+This takes a few minutes on the first time. The application will be automatically populated with test data.
+
 == Building
 
 Build the project with maven in the project's root directory:
