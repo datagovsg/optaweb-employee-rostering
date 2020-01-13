@@ -1,6 +1,20 @@
 {
   "private": true,
   "license": "Apache-2.0",
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "postbuild": "rimraf docker/build && shx cp -r build docker",
+    "typecheck": "tsc --noEmit",
+    "test": "cross-env TZ=UTC react-scripts test --reporters=default --reporters=jest-junit --transformIgnorePatterns \"node_modules/(?!(lodash-es))/\"",
+    "eject": "react-scripts eject",
+    "coverage": "cross-env TZ=UTC npm run test -- --coverage --watchAll=false",
+    "lint": "eslint --ext .js,.ts,.tsx src/ cypress/",
+    "lint:fix": "npm run lint -- --fix",
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run",
+    "locktt": "locktt"
+  },
   "dependencies": {
     "@patternfly/patternfly": "^2.6.16",
     "@patternfly/react-core": "^3.30.1",
@@ -33,20 +47,6 @@
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
     "yaml": "^1.7.2"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "postbuild": "rimraf docker/build && shx cp -r build docker",
-    "typecheck": "tsc --noEmit",
-    "test": "cross-env TZ=UTC react-scripts test --reporters=default --reporters=jest-junit --transformIgnorePatterns \"node_modules/(?!(lodash-es))/\"",
-    "eject": "react-scripts eject",
-    "coverage": "cross-env TZ=UTC npm run test -- --coverage --watchAll=false",
-    "lint": "eslint --ext .js,.ts,.tsx src/ cypress/",
-    "lint:fix": "npm run lint -- --fix",
-    "cypress:open": "cypress open",
-    "cypress:run": "cypress run",
-    "locktt": "locktt"
   },
   "jest-junit": {
     "outputDirectory": "./target/test-reports",
