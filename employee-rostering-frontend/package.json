@@ -1,6 +1,51 @@
 {
   "private": true,
   "license": "Apache-2.0",
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "postbuild": "rimraf docker/build && shx cp -r build docker",
+    "typecheck": "tsc --noEmit",
+    "test": "cross-env TZ=UTC react-scripts test --reporters=default --reporters=jest-junit --transformIgnorePatterns \"node_modules/(?!(lodash-es))/\"",
+    "eject": "react-scripts eject",
+    "coverage": "cross-env TZ=UTC npm run test -- --coverage --watchAll=false",
+    "lint": "eslint --ext .js,.ts,.tsx src/ cypress/",
+    "lint:fix": "npm run lint -- --fix",
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run",
+    "locktt": "locktt"
+  },
+  "husky": {
+    "hooks": {
+      "pre-push": "npm run lint && CI=true npm test"
+    }
+  },
+  "jest": {
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ]
+  },
+  "jest-junit": {
+    "outputDirectory": "./target/test-reports",
+    "outputName": "TEST-frontend.xml",
+    "suiteName": "org.optaweb.employeerostering.frontend.tests",
+    "suiteNameTemplate": "{filepath}",
+    "classNameTemplate": "org.optaweb.employeerostering.frontend.{filename}.{classname}",
+    "titleTemplate": "{title}",
+    "ancestorSeparator": "."
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
   "dependencies": {
     "@patternfly/patternfly": "^2.6.16",
     "@patternfly/react-core": "^3.30.1",
@@ -33,29 +78,6 @@
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
     "yaml": "^1.7.2"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "postbuild": "rimraf docker/build && shx cp -r build docker",
-    "typecheck": "tsc --noEmit",
-    "test": "cross-env TZ=UTC react-scripts test --reporters=default --reporters=jest-junit --transformIgnorePatterns \"node_modules/(?!(lodash-es))/\"",
-    "eject": "react-scripts eject",
-    "coverage": "cross-env TZ=UTC npm run test -- --coverage --watchAll=false",
-    "lint": "eslint --ext .js,.ts,.tsx src/ cypress/",
-    "lint:fix": "npm run lint -- --fix",
-    "cypress:open": "cypress open",
-    "cypress:run": "cypress run",
-    "locktt": "locktt"
-  },
-  "jest-junit": {
-    "outputDirectory": "./target/test-reports",
-    "outputName": "TEST-frontend.xml",
-    "suiteName": "org.optaweb.employeerostering.frontend.tests",
-    "suiteNameTemplate": "{filepath}",
-    "classNameTemplate": "org.optaweb.employeerostering.frontend.{filename}.{classname}",
-    "titleTemplate": "{title}",
-    "ancestorSeparator": "."
   },
   "devDependencies": {
     "@types/color": "^3.0.0",
@@ -102,27 +124,5 @@
     "set-tz": "^0.2.0",
     "shx": "^0.3.2",
     "typescript": "^3.5.1"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "husky": {
-    "hooks": {
-      "pre-push": "npm run lint && CI=true npm test"
-    }
-  },
-  "jest": {
-    "snapshotSerializers": [
-      "enzyme-to-json/serializer"
-    ]
   }
 }
