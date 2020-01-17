@@ -15,7 +15,7 @@
 
   <name>Employee Rostering as a Service Parent</name>
   <description>
-    Employee Rostering as a Service with OptaPlanner on OpenShift 3.
+    Employee Rostering as a Service with OptaPlanner.
   </description>
   <url>https://www.optaplanner.org</url>
   <inceptionYear>2017</inceptionYear>
