@@ -66,6 +66,15 @@ You will need to specify this program argument for Spring Boot to run in develop
 === Frontend
 Run `npm install` and then `npm run start` in the `employee-rostering-frontend` directory.
 
+=== Inserting an Agency
+
+Run the following SQL statement to insert a new agency for logging in.
+
+[source,sql]
+----
+insert into agency ( email_domain , name ) values ('open.gov.sg', 'Open Government Products');
+----
+
 == Building
 
 Build the project with maven in the project's root directory:
