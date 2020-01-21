@@ -1,19 +1,19 @@
 package org.optaweb.employeerostering.domain.otp;
 
-import org.optaweb.employeerostering.domain.user.User;
-
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.Calendar;
 import java.util.Date;
 
-import javax.persistence.Id;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.OneToOne;
-import javax.persistence.FetchType;
+
+import org.optaweb.employeerostering.domain.user.User;
 
 
 public class OneTimePassword {
