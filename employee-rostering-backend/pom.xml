@@ -267,10 +267,6 @@
                       <property name="max" value="120"/>
                     </module>
                   </module>
-                  <module name="RegexpHeader">
-                    <property name="header" value="${checkstyle.header.template}"/>
-                    <property name="fileExtensions" value="java"/>
-                  </module>
                 </module>
               </checkstyleRules>
               <includeTestSourceDirectory>true</includeTestSourceDirectory>
