@@ -63,8 +63,25 @@ You will need to specify this program argument for Spring Boot to run in develop
 
 `--spring.profiles.active=dev`
 
+=== Email server
+You will need a local SMTP server to receive emails containing the one-time password.
+
+[source,shell]
+----
+# Start
+$ sudo postfix start
+
+# Stop
+$ sudo postfix stop
+
+# Status
+$ sudo postfix status
+----
+
 === Frontend
-Run `npm install` and then `npm run start` in the `employee-rostering-frontend` directory.
+Run `npm install` and then `npm start` in the `employee-rostering-frontend` directory.
+
+
 
 === Inserting an Agency
 

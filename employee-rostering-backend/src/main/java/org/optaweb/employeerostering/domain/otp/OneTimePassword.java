@@ -5,17 +5,16 @@ import java.security.SecureRandom;
 import java.util.Calendar;
 import java.util.Date;
 
-import javax.persistence.FetchType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Email;
 
-import org.optaweb.employeerostering.domain.user.User;
-
-
+@Entity
 public class OneTimePassword {
     private static final Integer TOKEN_LENGTH = 6;
     private static final Integer EXPIRY_MINUTES = 5;
@@ -23,18 +22,20 @@ public class OneTimePassword {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    @Column(unique = true)
+    private String email;
+
     private String token;
     private Integer retries = 3;
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date expiry;
 
-    @OneToOne(targetEntity = User.class, fetch=FetchType.EAGER)
-    private User user;
-
-    public OneTimePassword (User user) throws NoSuchAlgorithmException {
-        token = generateToken();
-        expiry = calculateExpiry(EXPIRY_MINUTES);
+    public OneTimePassword (@Email String email) throws NoSuchAlgorithmException {
+        this.email = email;
+        this.token = generateToken();
+        this.expiry = calculateExpiry(EXPIRY_MINUTES);
     }
 
     private static String generateToken() throws NoSuchAlgorithmException {
@@ -53,5 +54,9 @@ public class OneTimePassword {
         cal.setTimeInMillis(new Date().getTime());
         cal.add(Calendar.MINUTE, minutes);
         return new Date(cal.getTime().getTime());
+    }
+
+    public String toString() {
+        return token;
     }
 }

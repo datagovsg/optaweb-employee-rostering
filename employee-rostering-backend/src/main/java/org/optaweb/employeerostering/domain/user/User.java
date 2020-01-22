@@ -10,6 +10,7 @@ import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import org.optaweb.employeerostering.domain.agency.Agency;
 
@@ -28,8 +29,18 @@ public class User {
     @ManyToOne
     private Agency agency;
 
+    /* Spring Security */
+    @NotNull
+    private Boolean enabled;
+
     public String getEmail() {
-        return email;
+        return this.email;
+    }
+
+    public User (Agency agency, String email) {
+        this.agency = agency;
+        this.email = email;
+        this.enabled = false;
     }
 
     @Transient
@@ -39,5 +50,13 @@ public class User {
         } catch (ArrayIndexOutOfBoundsException e) {
             return null;
         }
+    }
+
+    public Boolean isEnabled() {
+        return this.enabled;
+    }
+
+    public void setEnabled(Boolean enable) {
+        this.enabled = enable;
     }
 }
