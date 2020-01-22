@@ -7,7 +7,9 @@ import org.optaweb.employeerostering.domain.otp.OneTimePassword;
 import org.optaweb.employeerostering.domain.user.User;
 import org.optaweb.employeerostering.exception.AgencyNotFoundException;
 import org.optaweb.employeerostering.exception.OtpCreationException;
+import org.optaweb.employeerostering.exception.OtpMailException;
 import org.optaweb.employeerostering.service.agency.AgencyService;
+import org.optaweb.employeerostering.service.email.EmailService;
 import org.optaweb.employeerostering.service.otp.OtpService;
 import org.optaweb.employeerostering.service.user.UserService;
 import org.slf4j.Logger;
@@ -17,18 +19,20 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class LoginService {
+
     @Autowired
     AgencyService agencyService;
-
     @Autowired
     UserService userService;
-
     @Autowired
     OtpService otpService;
+    @Autowired
+    EmailService emailService;
 
     private static final Logger logger = LoggerFactory.getLogger(LoginService.class);
 
-    public void loginOrRegisterNewUser (String email) throws AgencyNotFoundException, OtpCreationException {
+    public void loginOrRegisterNewUser (String email)
+            throws AgencyNotFoundException, OtpCreationException, OtpMailException {
 
         String emailDomain = email.split("@")[1];
 
@@ -36,8 +40,7 @@ public class LoginService {
         Optional<Agency> agencyOptional = agencyService.getByEmailDomain(emailDomain);
 
         if(!agencyOptional.isPresent()) {
-            logger.info("Agency not found for email: " + email);
-            throw new AgencyNotFoundException("Agency is not registered");
+            throw new AgencyNotFoundException("Agency is not registered for " + email);
         }
 
         // Agency found, create user
@@ -46,8 +49,8 @@ public class LoginService {
 
         // Generate OTP
         OneTimePassword otp = otpService.createOtp(user.getEmail());
-        // Send email
-        logger.info("Mock: Sending email to: " + user.getEmail());
 
+        // Send OTP email
+        emailService.sendOtpMail(user, otp);
     }
 }

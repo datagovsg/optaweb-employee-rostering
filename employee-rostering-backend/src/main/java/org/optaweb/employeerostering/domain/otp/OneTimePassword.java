@@ -19,6 +19,7 @@ import org.optaweb.employeerostering.exception.OtpCreationException;
 @Entity
 public class OneTimePassword {
     private static final Integer TOKEN_LENGTH = 6;
+    private static final Integer TOKEN_MAX = 10; // exclusive
     private static final Integer EXPIRY_MINUTES = 5;
 
     @Id
@@ -37,7 +38,7 @@ public class OneTimePassword {
     public OneTimePassword (@Email String email) throws OtpCreationException {
         this.email = email;
         this.token = generateToken();
-        this.expiry = calculateExpiry(EXPIRY_MINUTES);
+        this.expiry = calculateExpiry();
     }
 
     private static String generateToken() throws OtpCreationException {
@@ -46,9 +47,9 @@ public class OneTimePassword {
             SecureRandom sr = SecureRandom.getInstance("SHA1PRNG");
 
             for (int i = 0; i < TOKEN_LENGTH; i++) {
-                sb.append(sr.nextInt());
+                sb.append(sr.nextInt(TOKEN_MAX));
             }
-
+            System.out.println("Generating token " + sb.toString());
             return sb.toString();
         } catch (NoSuchAlgorithmException e) {
             throw new OtpCreationException("OneTimePassword could not be created.", e);
@@ -56,13 +57,14 @@ public class OneTimePassword {
 
     }
 
-    private static Date calculateExpiry(Integer minutes) {
+    private static Date calculateExpiry () {
         final Calendar cal = Calendar.getInstance();
         cal.setTimeInMillis(new Date().getTime());
-        cal.add(Calendar.MINUTE, minutes);
+        cal.add(Calendar.MINUTE, OneTimePassword.EXPIRY_MINUTES);
         return new Date(cal.getTime().getTime());
     }
 
+    @Override
     public String toString() {
         return token;
     }
