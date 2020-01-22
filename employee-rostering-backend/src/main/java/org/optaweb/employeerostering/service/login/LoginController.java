@@ -28,10 +28,12 @@ public class LoginController {
 
     @ApiOperation("Login/registration for a user that belongs to a registered agency")
     @PostMapping("/otp")
-    public ResponseEntity<Boolean> generateOtp(@Valid @Email @RequestParam("email") String email) {
-        Boolean success = loginService.loginOrRegisterNewUser(email);
-        if (success) {
-            return new ResponseEntity<>(success, HttpStatus.OK);
-        } else return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    public ResponseEntity<Void> generateOtp(@Valid @Email @RequestParam("email") String email) {
+        try {
+            loginService.loginOrRegisterNewUser(email);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 }

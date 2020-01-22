@@ -27,7 +27,7 @@ public class LoginService {
 
     private static final Logger logger = LoggerFactory.getLogger(LoginService.class);
 
-    public Boolean loginOrRegisterNewUser (String email) {
+    public void loginOrRegisterNewUser (String email) throws Exception {
 
         String emailDomain = email.split("@")[1];
 
@@ -36,7 +36,7 @@ public class LoginService {
 
         if(!agencyOptional.isPresent()) {
             logger.info("Agency not found for email: " + email);
-            return false;
+            throw new Exception("Agency not registered");
         }
 
         // Agency found, create user
@@ -49,11 +49,10 @@ public class LoginService {
             otp = otpService.createOtp(user.getEmail());
         } catch (NoSuchAlgorithmException e) {
             logger.error("Could not generate OTP for user", e);
-            return false;
+            throw e;
         }
 
         // Send email
         logger.info("Mock: Sending email to: " + user.getEmail());
-        return true;
     }
 }
