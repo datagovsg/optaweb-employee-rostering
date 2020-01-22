@@ -49,7 +49,6 @@ public class OneTimePassword {
             for (int i = 0; i < TOKEN_LENGTH; i++) {
                 sb.append(sr.nextInt(TOKEN_MAX));
             }
-            System.out.println("Generating token " + sb.toString());
             return sb.toString();
         } catch (NoSuchAlgorithmException e) {
             throw new OtpCreationException("OneTimePassword could not be created.", e);
