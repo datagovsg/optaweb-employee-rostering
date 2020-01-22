@@ -22,11 +22,6 @@ script:
   # the git command returns 1 and fails the build if there are any uncommitted changes
   - git diff HEAD --exit-code
 after_success:
-  - echo "On success, the working directory looks like..."
-  - ls
-  - cat .dockerignore
-  - ls
-  - cat Dockerfile
   - >
     if [ "$TRAVIS_EVENT_TYPE" == "push" ]; then
       docker login -u $DOCKER_USER -p $DOCKER_PASSWORD;
@@ -43,3 +38,25 @@ after_success:
     else 
       echo "Travis event type is $TRAVIS_EVENT_TYPE, not building docker image";
     fi
+
+before_deploy:
+  - if [ ! -d "$HOME/google-cloud-sdk/bin" ]; then rm -rf $HOME/google-cloud-sdk; export CLOUDSDK_CORE_DISABLE_PROMPTS=1; curl https://sdk.cloud.google.com | bash; fi
+  - source /home/travis/google-cloud-sdk/path.bash.inc
+  - gcloud --quiet version
+  - gcloud --quiet components update
+  - gcloud --quiet components update kubectl
+  - echo $GCLOUD_SERVICE_KEY | base64 --decode -i > ${HOME}/gcloud-service-key.json
+  - gcloud auth activate-service-account --key-file ${HOME}/gcloud-service-key.json
+  - gcloud --quiet config set compute/zone asia-southeast1-a
+  - gcloud --quiet config set project rostering-ai
+
+deploy:
+  - provider: script
+    script: >-
+      gcloud --quiet config set container/cluster ctrl-shift-standalone && 
+      gcloud --quiet container clusters get-credentials ctrl-shift-standalone &&
+      kubectl set image deployment/ctrl-shift-standalone ctrl-shift-standalone=$REPO:travis-$TRAVIS_BUILD_NUMBER
+    skip_cleanup: true
+    on:
+      branch: $STAGING_BRANCH
+      type: push
