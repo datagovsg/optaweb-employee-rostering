@@ -25,7 +25,6 @@ public class LoginController {
     @Autowired
     private LoginService loginService;
 
-
     @ApiOperation("Login/registration for a user that belongs to a registered agency")
     @PostMapping("/otp")
     public ResponseEntity<Void> generateOtp(@Valid @Email @RequestParam("email") String email) {

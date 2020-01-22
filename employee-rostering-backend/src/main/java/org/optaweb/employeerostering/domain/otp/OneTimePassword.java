@@ -14,6 +14,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Email;
 
+import org.optaweb.employeerostering.exception.OtpCreationException;
+
 @Entity
 public class OneTimePassword {
     private static final Integer TOKEN_LENGTH = 6;
@@ -32,21 +34,26 @@ public class OneTimePassword {
     @Temporal(TemporalType.TIMESTAMP)
     private Date expiry;
 
-    public OneTimePassword (@Email String email) throws NoSuchAlgorithmException {
+    public OneTimePassword (@Email String email) throws OtpCreationException {
         this.email = email;
         this.token = generateToken();
         this.expiry = calculateExpiry(EXPIRY_MINUTES);
     }
 
-    private static String generateToken() throws NoSuchAlgorithmException {
-        StringBuilder sb = new StringBuilder(TOKEN_LENGTH);
-        SecureRandom sr = SecureRandom.getInstance("SHA1PRNG");
+    private static String generateToken() throws OtpCreationException {
+        try {
+            StringBuilder sb = new StringBuilder(TOKEN_LENGTH);
+            SecureRandom sr = SecureRandom.getInstance("SHA1PRNG");
 
-        for (int i = 0; i < TOKEN_LENGTH; i++) {
-            sb.append(sr.nextInt());
+            for (int i = 0; i < TOKEN_LENGTH; i++) {
+                sb.append(sr.nextInt());
+            }
+
+            return sb.toString();
+        } catch (NoSuchAlgorithmException e) {
+            throw new OtpCreationException("OneTimePassword could not be created.", e);
         }
 
-        return sb.toString();
     }
 
     private static Date calculateExpiry(Integer minutes) {

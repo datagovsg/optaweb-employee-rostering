@@ -1,11 +1,12 @@
 package org.optaweb.employeerostering.service.login;
 
-import java.security.NoSuchAlgorithmException;
 import java.util.Optional;
 
 import org.optaweb.employeerostering.domain.agency.Agency;
 import org.optaweb.employeerostering.domain.otp.OneTimePassword;
 import org.optaweb.employeerostering.domain.user.User;
+import org.optaweb.employeerostering.exception.AgencyNotFoundException;
+import org.optaweb.employeerostering.exception.OtpCreationException;
 import org.optaweb.employeerostering.service.agency.AgencyService;
 import org.optaweb.employeerostering.service.otp.OtpService;
 import org.optaweb.employeerostering.service.user.UserService;
@@ -27,7 +28,7 @@ public class LoginService {
 
     private static final Logger logger = LoggerFactory.getLogger(LoginService.class);
 
-    public void loginOrRegisterNewUser (String email) throws Exception {
+    public void loginOrRegisterNewUser (String email) throws AgencyNotFoundException, OtpCreationException {
 
         String emailDomain = email.split("@")[1];
 
@@ -36,7 +37,7 @@ public class LoginService {
 
         if(!agencyOptional.isPresent()) {
             logger.info("Agency not found for email: " + email);
-            throw new Exception("Agency not registered");
+            throw new AgencyNotFoundException("Agency is not registered");
         }
 
         // Agency found, create user
@@ -44,15 +45,9 @@ public class LoginService {
         User user = userService.getOrCreateUser(agency, email);
 
         // Generate OTP
-        OneTimePassword otp;
-        try {
-            otp = otpService.createOtp(user.getEmail());
-        } catch (NoSuchAlgorithmException e) {
-            logger.error("Could not generate OTP for user", e);
-            throw e;
-        }
-
+        OneTimePassword otp = otpService.createOtp(user.getEmail());
         // Send email
         logger.info("Mock: Sending email to: " + user.getEmail());
+
     }
 }
