@@ -31,7 +31,7 @@ class DevelopmentSecurityConfig extends AbstractSecurityConfig {
                 .csrf().disable();
         httpSecurity
                 .authorizeRequests()
-                .antMatchers("/h2-console/**")
+                .antMatchers("/h2-console/**", "/login/**")
                 .permitAll();
 
         // TODO: discern which routes need to be protected in the application
