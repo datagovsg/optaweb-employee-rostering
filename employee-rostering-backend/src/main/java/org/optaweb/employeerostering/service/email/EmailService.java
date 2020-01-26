@@ -5,7 +5,7 @@ import javax.mail.internet.MimeMessage;
 
 import org.optaweb.employeerostering.domain.otp.OneTimePassword;
 import org.optaweb.employeerostering.domain.user.User;
-import org.optaweb.employeerostering.exception.OtpMailException;
+import org.optaweb.employeerostering.exception.EmailServiceException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +20,7 @@ public class EmailService {
     @Autowired
     private JavaMailSender javaMailSender;
 
-    public void sendOtpMail(User user, OneTimePassword otp) throws OtpMailException {
+    public void sendOtpMail(User user, OneTimePassword otp) throws EmailServiceException {
         String toEmail = user.getEmail();
         try {
             MimeMessage mimeMessage = javaMailSender.createMimeMessage();
@@ -39,7 +39,7 @@ public class EmailService {
             logger.info("OTP sent to:\t" + toEmail);
 
         } catch (MessagingException e) {
-            throw new OtpMailException("Could not email OTP to user:\t" + toEmail, e);
+            throw new EmailServiceException("Could not email OTP to user:\t" + toEmail, e);
         }
     }
 }

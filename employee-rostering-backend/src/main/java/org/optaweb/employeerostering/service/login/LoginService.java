@@ -5,7 +5,7 @@ import java.util.Optional;
 import org.optaweb.employeerostering.domain.agency.Agency;
 import org.optaweb.employeerostering.domain.otp.OneTimePassword;
 import org.optaweb.employeerostering.domain.user.User;
-import org.optaweb.employeerostering.exception.OtpMailException;
+import org.optaweb.employeerostering.exception.EmailServiceException;
 import org.optaweb.employeerostering.service.agency.AgencyService;
 import org.optaweb.employeerostering.service.email.EmailService;
 import org.optaweb.employeerostering.service.otp.OtpService;
@@ -52,7 +52,7 @@ public class LoginService {
         // Send OTP email
         try {
             emailService.sendOtpMail(user, otp);
-        } catch (OtpMailException e) {
+        } catch (EmailServiceException e) {
             throw new AuthenticationServiceException("Could not send OTP to user:\t" + email, e);
         }
     }
