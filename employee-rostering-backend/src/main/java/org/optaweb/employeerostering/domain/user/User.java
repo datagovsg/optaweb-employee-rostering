@@ -33,23 +33,20 @@ public class User {
     @NotNull
     private Boolean enabled;
 
-    public String getEmail() {
-        return this.email;
-    }
-
     public User (Agency agency, String email) {
         this.agency = agency;
         this.email = email;
         this.enabled = false;
     }
 
+    public String getEmail() {
+        return this.email;
+    }
+
     @Transient
     public String getEmailDomain() {
-        try {
-            return email.split("@")[1];
-        } catch (ArrayIndexOutOfBoundsException e) {
-            return null;
-        }
+        String[] emailParts = email.split("@");
+        return emailParts.length > 1 ? emailParts[1] : null;
     }
 
     public Boolean isEnabled() {

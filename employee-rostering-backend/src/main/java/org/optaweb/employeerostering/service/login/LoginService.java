@@ -5,8 +5,6 @@ import java.util.Optional;
 import org.optaweb.employeerostering.domain.agency.Agency;
 import org.optaweb.employeerostering.domain.otp.OneTimePassword;
 import org.optaweb.employeerostering.domain.user.User;
-import org.optaweb.employeerostering.exception.AgencyNotFoundException;
-import org.optaweb.employeerostering.exception.OtpCreationException;
 import org.optaweb.employeerostering.exception.OtpMailException;
 import org.optaweb.employeerostering.service.agency.AgencyService;
 import org.optaweb.employeerostering.service.email.EmailService;
@@ -15,6 +13,7 @@ import org.optaweb.employeerostering.service.user.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -32,7 +31,7 @@ public class LoginService {
     private static final Logger logger = LoggerFactory.getLogger(LoginService.class);
 
     public void loginOrRegisterNewUser (String email)
-            throws AgencyNotFoundException, OtpCreationException, OtpMailException {
+            throws AuthenticationServiceException {
 
         String emailDomain = email.split("@")[1];
 
@@ -40,7 +39,7 @@ public class LoginService {
         Optional<Agency> agencyOptional = agencyService.getByEmailDomain(emailDomain);
 
         if(!agencyOptional.isPresent()) {
-            throw new AgencyNotFoundException("Agency is not registered for " + email);
+            throw new AuthenticationServiceException("Agency is not registered for " + email);
         }
 
         // Agency found, create user
@@ -51,6 +50,10 @@ public class LoginService {
         OneTimePassword otp = otpService.createOtp(user.getEmail());
 
         // Send OTP email
-        emailService.sendOtpMail(user, otp);
+        try {
+            emailService.sendOtpMail(user, otp);
+        } catch (OtpMailException e) {
+            throw new AuthenticationServiceException("Could not send OTP to user:\t" + email, e);
+        }
     }
 }

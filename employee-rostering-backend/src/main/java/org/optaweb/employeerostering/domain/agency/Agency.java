@@ -22,9 +22,6 @@ public class Agency {
     @Column(unique = true)
     private String emailDomain;
 
-    @SuppressWarnings("unused")
-    public Agency() {}
-
     // ************************************************************************
     // Simple getters and setters
     // ************************************************************************
@@ -32,5 +29,5 @@ public class Agency {
     public String getEmailDomain() {
         return emailDomain;
     }
-
+    public String getName() { return name; }
 }
