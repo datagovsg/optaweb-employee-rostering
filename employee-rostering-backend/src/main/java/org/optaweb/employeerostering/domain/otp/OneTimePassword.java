@@ -18,7 +18,7 @@ import javax.validation.constraints.Email;
 public class OneTimePassword {
     private static final Integer TOKEN_LENGTH = 6;
     private static final Integer TOKEN_MAX = 10; // exclusive
-    private static final Integer EXPIRY_MINUTES = 5;
+    public static final Integer EXPIRY_MINUTES = 5;
     private static final String OTP_ALGO = "SHA1PRNG";
     private static SecureRandom SR = makeSecureRandom();
 

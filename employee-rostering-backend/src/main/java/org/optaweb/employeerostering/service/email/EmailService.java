@@ -31,7 +31,7 @@ public class EmailService {
             mimeMessageHelper.setSubject("One-Time Password for Rostering");
             mimeMessageHelper.setText(
                     "Your OTP is <b>" + otp.toString() + "</b>. " +
-                            "It will expire in 10 minutes. " +
+                            "It will expire in " + OneTimePassword.EXPIRY_MINUTES + " minutes. " +
                             "Please use this to login to your Rostering account.",
                     true);
 
