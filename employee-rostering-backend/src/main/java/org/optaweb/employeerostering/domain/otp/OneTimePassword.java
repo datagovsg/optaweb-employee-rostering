@@ -14,21 +14,19 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Email;
 
-import org.optaweb.employeerostering.exception.OtpInitRuntimeException;
-
 @Entity
 public class OneTimePassword {
     private static final Integer TOKEN_LENGTH = 6;
     private static final Integer TOKEN_MAX = 10; // exclusive
     private static final Integer EXPIRY_MINUTES = 5;
+    private static final String OTP_ALGO = "SHA1PRNG";
+    private static SecureRandom SR = makeSecureRandom();
 
-    private static SecureRandom SR = null;
-
-    static {
+    private static SecureRandom makeSecureRandom() {
         try {
-            SR = SecureRandom.getInstance("SHA1PRNG");
+            return SecureRandom.getInstance(OTP_ALGO);
         } catch (NoSuchAlgorithmException e) {
-            throw new OtpInitRuntimeException("Could not initialise OneTimePassword", e);
+            throw new IllegalStateException("Could not initialise OneTimePassword", e);
         }
     }
 
