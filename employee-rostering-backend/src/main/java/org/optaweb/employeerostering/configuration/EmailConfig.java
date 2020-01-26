@@ -3,6 +3,9 @@ package org.optaweb.employeerostering.configuration;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
+import org.apache.commons.mail.util.MimeMessageParser;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -15,11 +18,11 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessagePreparator;
 
 @Configuration
-@Profile(Profiles.DEFAULT)
 public class EmailConfig {
 
     @Bean
-    public JavaMailSender getJavaMailSender() {
+    @Profile(Profiles.NOT_PRODUCTION)
+    public JavaMailSender getDevelopmentMailSender() {
         return new PrintScreenMailSender();
     }
 }
@@ -28,18 +31,35 @@ public class EmailConfig {
  * A mail sender that simply prints the contents of the email to the screen on send.
  */
 class PrintScreenMailSender extends JavaMailSenderImpl {
+    private static final Logger logger = LoggerFactory.getLogger(PrintScreenMailSender.class);
 
-    private void printMessage(MimeMessage m) {
-        System.out.println(m.toString());
+    private void print (MimeMessage m) {
+        MimeMessageParser p = new MimeMessageParser(m);
+
+        try {
+            StringBuilder sb = new StringBuilder();
+
+            sb.append("From: ").append(p.getFrom()).append("\n")
+                    .append("To: ").append(p.getTo()).append("\n")
+                    .append("cc: ").append(p.getCc()).append("\n")
+                    .append("bcc: ").append(p.getBcc()).append("\n")
+                    .append("Subject: ").append(p.getSubject()).append("\n")
+                    .append("Attachments: ").append(p.getAttachmentList()).append("\n")
+                    .append(p.parse().getHtmlContent());
+
+            System.out.println(sb.toString());
+        } catch (Exception e) {
+            logger.error("Could not print email to screen:\t", e);
+        }
     }
 
-    private void printMessage(SimpleMailMessage m) {
+    private void print (SimpleMailMessage m) {
         System.out.println(m.toString());
     }
 
     @Override
     public void send(MimeMessage m) throws MailException {
-        printMessage(m);
+        print(m);
     }
 
     @Override
@@ -74,13 +94,13 @@ class PrintScreenMailSender extends JavaMailSenderImpl {
 
     @Override
     public void send (SimpleMailMessage simpleMailMessage) throws MailException {
-        this.printMessage(simpleMailMessage);
+        this.print(simpleMailMessage);
     }
 
     @Override
     public void send (SimpleMailMessage... simpleMailMessages) throws MailException {
         for (SimpleMailMessage m: simpleMailMessages) {
-            this.printMessage(m);
+            this.print(m);
         }
     }
 }
