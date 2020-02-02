@@ -12,8 +12,8 @@ abstract public class AbstractSecurityConfig extends WebSecurityConfigurerAdapte
 
 
 @EnableWebSecurity
-@Profile(Profiles.DEVELOPMENT)
-class DevelopmentSecurityConfig extends AbstractSecurityConfig {
+@Profile({Profiles.DEVELOPMENT, Profiles.TEST})
+class MockSecurityConfig extends AbstractSecurityConfig {
     private static final Logger logger = LoggerFactory.getLogger(Profiles.class);
 
     @Override
