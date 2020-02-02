@@ -21,8 +21,8 @@ import org.springframework.mail.javamail.MimeMessagePreparator;
 public class EmailConfig {
 
     @Bean
-    @Profile(Profiles.NOT_PRODUCTION)
-    public JavaMailSender getDevelopmentMailSender() {
+    @Profile({ Profiles.TEST, Profiles.DEVELOPMENT })
+    public JavaMailSender getMailSender() {
         return new PrintScreenMailSender();
     }
 }
