@@ -30,10 +30,10 @@ public class EmailService {
             mimeMessageHelper.setFrom("donotreply@mail.roster.gov.sg");
             mimeMessageHelper.setSubject("One-Time Password for Rostering");
             mimeMessageHelper.setText(
-                    "Your OTP is <b>" + otp.toString() + "</b>. " +
-                            "It will expire in " + OneTimePassword.EXPIRY_MINUTES + " minutes. " +
-                            "Please use this to login to your Rostering account.",
-                    true);
+                "Your OTP is <b>" + otp.toString() + "</b>. " +
+                "It will expire in " + OneTimePassword.EXPIRY_MINUTES + " minutes. " +
+                "Please use this to login to your Rostering account.",
+    true);
 
             javaMailSender.send(mimeMessage);
             logger.info("OTP sent to:\t" + toEmail);

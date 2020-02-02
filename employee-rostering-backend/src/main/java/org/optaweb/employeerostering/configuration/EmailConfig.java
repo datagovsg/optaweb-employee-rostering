@@ -37,17 +37,14 @@ class PrintScreenMailSender extends JavaMailSenderImpl {
         MimeMessageParser p = new MimeMessageParser(m);
 
         try {
-            StringBuilder sb = new StringBuilder();
-
-            sb.append("From: ").append(p.getFrom()).append("\n")
-                    .append("To: ").append(p.getTo()).append("\n")
-                    .append("cc: ").append(p.getCc()).append("\n")
-                    .append("bcc: ").append(p.getBcc()).append("\n")
-                    .append("Subject: ").append(p.getSubject()).append("\n")
-                    .append("Attachments: ").append(p.getAttachmentList()).append("\n")
-                    .append(p.parse().getHtmlContent());
-
-            System.out.println(sb.toString());
+            String sb = "From: " + p.getFrom() + "\n" +
+                "To: " + p.getTo() + "\n" +
+                "cc: " + p.getCc() + "\n" +
+                "bcc: " + p.getBcc() + "\n" +
+                "Subject: " + p.getSubject() + "\n" +
+                "Attachments: " + p.getAttachmentList() + "\n" +
+                p.parse().getHtmlContent();
+            logger.info(sb);
         } catch (Exception e) {
             logger.error("Could not print email to screen:\t", e);
         }
@@ -64,7 +61,7 @@ class PrintScreenMailSender extends JavaMailSenderImpl {
 
     @Override
     public void send(MimeMessage... ms) throws MailException {
-        for (MimeMessage m: ms) {
+        for (MimeMessage m : ms) {
             this.send(m);
         }
     }
@@ -87,7 +84,7 @@ class PrintScreenMailSender extends JavaMailSenderImpl {
 
     @Override
     public void send(MimeMessagePreparator... mps) throws MailException {
-        for (MimeMessagePreparator mp: mps) {
+        for (MimeMessagePreparator mp : mps) {
             this.send(mp);
         }
     }
@@ -99,7 +96,7 @@ class PrintScreenMailSender extends JavaMailSenderImpl {
 
     @Override
     public void send (SimpleMailMessage... simpleMailMessages) throws MailException {
-        for (SimpleMailMessage m: simpleMailMessages) {
+        for (SimpleMailMessage m : simpleMailMessages) {
             this.print(m);
         }
     }
