@@ -21,7 +21,7 @@ import { spotSelectors, spotOperations } from 'store/spot';
 import { skillSelectors } from 'store/skill';
 import { Spot } from 'domain/Spot';
 import { AppState } from 'store/types';
-import { TextInput, Text, Chip, ChipGroup } from '@patternfly/react-core';
+import { TextInput, Text, Chip, ChipGroup, Checkbox } from '@patternfly/react-core';
 import { connect } from 'react-redux';
 import { Skill } from 'domain/Skill';
 import { Predicate, ReadonlyPartial, Sorter } from 'types';
@@ -38,7 +38,11 @@ interface StateProps extends DataTableProps<Spot> {
 const mapStateToProps = (state: AppState, ownProps: Props): StateProps => ({
   ...ownProps,
   title: ownProps.t('spots'),
-  columnTitles: [ownProps.t('name'), ownProps.t('requiredSkillSet')],
+  columnTitles: [
+    ownProps.t('name'),
+    ownProps.t('requiredSkillSet'),
+    ownProps.t('avoidBackToBack'),
+  ],
   tableData: spotSelectors.getSpotList(state),
   skillList: skillSelectors.getSkillList(state),
   tenantId: state.tenantData.currentTenantId,
@@ -79,12 +83,16 @@ export class SpotsPage extends DataTable<Spot, Props> {
           </Chip>
         ))}
       </ChipGroup>,
+      data.avoidBackToBack
+        ? <Text key={0}>Yes</Text>
+        : <Text key={0}>No</Text>,
     ];
   }
 
   getInitialStateForNewRow(): Partial<Spot> {
     return {
       requiredSkillSet: [],
+      avoidBackToBack: false,
     };
   }
 
@@ -104,6 +112,15 @@ export class SpotsPage extends DataTable<Spot, Props> {
         optionToStringMap={skill => skill.name}
         value={data.requiredSkillSet ? data.requiredSkillSet : []}
         onChange={selected => setProperty('requiredSkillSet', selected)}
+      />,
+      <Checkbox
+        id="avoidBackToBack"
+        key={2}
+        isChecked={data.avoidBackToBack}
+        onChange={(checked) => {
+          console.log('checked', checked)
+          setProperty('avoidBackToBack', checked);
+        }}
       />,
     ];
   }

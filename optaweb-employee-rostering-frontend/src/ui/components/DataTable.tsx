@@ -221,11 +221,11 @@ export abstract class DataTable<T, P extends DataTableProps<T>> extends React.Co
 
     const cellContents = viewers.map((viewer, index) => ({
       title:
-  <EditableComponent
-    viewer={viewer}
-    editor={editors[index]}
-    isEditing={isEditing}
-  />,
+      <EditableComponent
+        viewer={viewer}
+        editor={editors[index]}
+        isEditing={isEditing}
+      />,
     })).concat([{
       title: this.getEditButtons(data, editedData, isEditing,
         () => {
@@ -291,6 +291,7 @@ export abstract class DataTable<T, P extends DataTableProps<T>> extends React.Co
             .concat([{ title: this.getAddButtons(this.state.newRowData) }]),
         },
       ] : [];
+
     const sorters = this.getSorters();
 
     const filteredRows = new Stream(this.props.tableData)
@@ -323,6 +324,7 @@ export abstract class DataTable<T, P extends DataTableProps<T>> extends React.Co
     })).concat([{
       title: '', cellTransforms: [headerCol], props: {}, transforms: undefined,
     }]) as any;
+
     return (
       <>
         <Level
