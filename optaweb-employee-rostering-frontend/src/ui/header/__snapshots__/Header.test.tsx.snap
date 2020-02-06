@@ -3,14 +3,16 @@
 exports[`Header component should render correctly on a desktop 1`] = `
 <PageHeader
   logo={
-    <Brand
-      alt="OptaPlanner Logo"
-      src="/assets/images/optaPlannerLogo200px.png"
-    />
+    <Title
+      headingLevel="h1"
+      size="xl"
+    >
+      ctrlshift
+    </Title>
   }
   logoProps={
     Object {
-      "href": "https://www.optaplanner.org",
+      "href": "https://open.gov.sg",
       "rel": "noopener noreferrer",
       "target": "_blank",
     }
@@ -29,14 +31,16 @@ exports[`Header component should render correctly on a desktop 1`] = `
 exports[`Header component should render correctly on a mobile 1`] = `
 <PageHeader
   logo={
-    <Brand
-      alt="OptaPlanner Logo"
-      src="/assets/images/optaPlannerLogo200px.png"
-    />
+    <Title
+      headingLevel="h1"
+      size="xl"
+    >
+      ctrlshift
+    </Title>
   }
   logoProps={
     Object {
-      "href": "https://www.optaplanner.org",
+      "href": "https://open.gov.sg",
       "rel": "noopener noreferrer",
       "target": "_blank",
     }
