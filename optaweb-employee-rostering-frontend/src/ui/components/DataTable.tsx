@@ -221,11 +221,11 @@ export abstract class DataTable<T, P extends DataTableProps<T>> extends React.Co
 
     const cellContents = viewers.map((viewer, index) => ({
       title:
-      <EditableComponent
-        viewer={viewer}
-        editor={editors[index]}
-        isEditing={isEditing}
-      />,
+  <EditableComponent
+    viewer={viewer}
+    editor={editors[index]}
+    isEditing={isEditing}
+  />,
     })).concat([{
       title: this.getEditButtons(data, editedData, isEditing,
         () => {
