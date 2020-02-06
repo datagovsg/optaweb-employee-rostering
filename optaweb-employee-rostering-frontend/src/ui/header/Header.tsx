@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { Brand, PageHeader } from '@patternfly/react-core';
+import { Title, PageHeader } from '@patternfly/react-core';
 import * as React from 'react';
 import { useMediaQuery } from 'react-responsive';
 import Navigation from './Navigation';
@@ -25,10 +25,10 @@ const Header: React.FC<{ onNavToggle: () => void} > = ({ onNavToggle }) => {
   return (
     <PageHeader
       logo={(
-        <Brand src="/assets/images/optaPlannerLogo200px.png" alt="OptaPlanner Logo" />
+        <Title headingLevel="h1" size="xl">ctrlshift</Title>
       )}
       logoProps={{
-        href: 'https://www.optaplanner.org',
+        href: 'https://open.gov.sg',
         target: '_blank',
         rel: 'noopener noreferrer',
       }}
