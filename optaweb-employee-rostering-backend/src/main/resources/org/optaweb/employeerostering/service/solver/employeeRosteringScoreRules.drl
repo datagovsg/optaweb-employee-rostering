@@ -207,3 +207,20 @@ rule "Employee is not rotation employee"
     then
         scoreHolder.addSoftConstraintMatch(kcontext, -$rosterParametrization.getRotationEmployeeMatchWeight());
 end
+
+rule "No 2 avoidBackToBack shifts within 24 hours from each other"
+    when
+        $s : Shift(
+                employee != null,
+                $e : employee,
+                spot.getAvoidBackToBackShifts(),
+                $leftEndDateTime : endDateTime)
+        Shift(
+            employee == $e,
+            this != $s,
+            spot.getAvoidBackToBackShifts(),
+            $leftEndDateTime <= endDateTime,
+            $leftEndDateTime.until(startDateTime, ChronoUnit.HOURS) < 24)
+    then
+        scoreHolder.addSoftConstraintMatch(kcontext, -1);
+end
