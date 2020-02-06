@@ -32,7 +32,7 @@ class MockSecurityConfig extends AbstractSecurityConfig {
 
         // TODO: discern which routes need to be protected in the application
         httpSecurity.authorizeRequests()
-                .antMatchers("/*").permitAll()
+                .antMatchers("/**").permitAll()
                 .and().formLogin();
     }
 }
@@ -48,7 +48,7 @@ class ProductionSecurityConfig extends AbstractSecurityConfig {
 
         // TODO: discern which routes need to be protected in the application
         httpSecurity.authorizeRequests()
-                .antMatchers("/*").permitAll()
+                .antMatchers("/**").permitAll()
                 .and().formLogin();
     }
 }
