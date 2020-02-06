@@ -347,6 +347,7 @@ const spot: Spot = {
   id: 2,
   version: 0,
   name: 'Spot',
+  heavyDuty: false,
   requiredSkillSet: [
     {
       tenantId: 0,

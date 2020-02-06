@@ -207,3 +207,21 @@ rule "Employee is not rotation employee"
     then
         scoreHolder.addSoftConstraintMatch(kcontext, -$rosterParametrization.getRotationEmployeeMatchWeight());
 end
+
+rule "No back to back heavy duties within 72 hours of each other"
+    when
+        $rosterParametrization : RosterParametrization(heavyDutyBackToBackWeight != 0)
+        $s : Shift(
+                employee != null,
+                $e : employee,
+                spot.getHeavyDuty(),
+                $leftEndDateTime : endDateTime)
+        Shift(
+            employee == $e,
+            this != $s,
+            spot.getHeavyDuty(),
+            $leftEndDateTime <= endDateTime,
+            $leftEndDateTime.until(startDateTime, ChronoUnit.HOURS) < 72)
+    then
+        scoreHolder.addSoftConstraintMatch(kcontext, -$rosterParametrization.getHeavyDutyBackToBackWeight());
+end

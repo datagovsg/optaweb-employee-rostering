@@ -107,8 +107,9 @@ public class TenantRestControllerTest extends AbstractEntityRequireTenantRestSer
         assertThat(getResponse.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(getResponse.getBody()).isNotNull();
 
-        ResponseEntity<RosterParametrization> updateResponse =
-                updateRosterParametrization(new RosterParametrizationView(TENANT_ID, 0, 0, 0, DayOfWeek.TUESDAY));
+        ResponseEntity<RosterParametrization> updateResponse = updateRosterParametrization(
+            new RosterParametrizationView(TENANT_ID, 0, 0, 0, DayOfWeek.TUESDAY, 0)
+        );
         assertThat(updateResponse.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(updateResponse.getBody().getDesiredTimeSlotWeight()).isEqualTo(0);
         assertThat(updateResponse.getBody().getRotationEmployeeMatchWeight()).isEqualTo(0);

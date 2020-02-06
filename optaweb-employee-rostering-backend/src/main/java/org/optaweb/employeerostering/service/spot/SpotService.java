@@ -39,7 +39,12 @@ public class SpotService extends AbstractRestService {
 
     public Spot convertFromView(Integer tenantId, SpotView spotView) {
         validateTenantIdParameter(tenantId, spotView);
-        Spot spot = new Spot(tenantId, spotView.getName(), spotView.getRequiredSkillSet());
+        Spot spot = new Spot(
+            tenantId,
+            spotView.getName(),
+            spotView.getRequiredSkillSet(),
+            spotView.getHeavyDuty()
+        );
         spot.setId(spotView.getId());
         spot.setVersion(spotView.getVersion());
         return spot;

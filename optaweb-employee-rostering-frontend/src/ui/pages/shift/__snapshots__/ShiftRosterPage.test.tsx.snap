@@ -22,6 +22,7 @@ exports[`Shift Roster Page should render correctly when creating a new shift via
       options={
         Array [
           Object {
+            "heavyDuty": false,
             "id": 2,
             "name": "Spot",
             "requiredSkillSet": Array [
@@ -36,6 +37,7 @@ exports[`Shift Roster Page should render correctly when creating a new shift via
             "version": 0,
           },
           Object {
+            "heavyDuty": false,
             "id": 111,
             "name": "New Spot",
             "requiredSkillSet": Array [
@@ -53,6 +55,7 @@ exports[`Shift Roster Page should render correctly when creating a new shift via
       }
       value={
         Object {
+          "heavyDuty": false,
           "id": 2,
           "name": "Spot",
           "requiredSkillSet": Array [
@@ -183,6 +186,7 @@ exports[`Shift Roster Page should render correctly when creating a new shift via
           "rotationViolationPenaltyList": Array [],
           "shiftEmployeeConflictList": Array [],
           "spot": Object {
+            "heavyDuty": false,
             "id": 2,
             "name": "Spot",
             "requiredSkillSet": Array [
@@ -240,6 +244,7 @@ exports[`Shift Roster Page should render correctly when loaded 1`] = `
       options={
         Array [
           Object {
+            "heavyDuty": false,
             "id": 2,
             "name": "Spot",
             "requiredSkillSet": Array [
@@ -254,6 +259,7 @@ exports[`Shift Roster Page should render correctly when loaded 1`] = `
             "version": 0,
           },
           Object {
+            "heavyDuty": false,
             "id": 111,
             "name": "New Spot",
             "requiredSkillSet": Array [
@@ -271,6 +277,7 @@ exports[`Shift Roster Page should render correctly when loaded 1`] = `
       }
       value={
         Object {
+          "heavyDuty": false,
           "id": 2,
           "name": "Spot",
           "requiredSkillSet": Array [
@@ -401,6 +408,7 @@ exports[`Shift Roster Page should render correctly when loaded 1`] = `
           "rotationViolationPenaltyList": Array [],
           "shiftEmployeeConflictList": Array [],
           "spot": Object {
+            "heavyDuty": false,
             "id": 2,
             "name": "Spot",
             "requiredSkillSet": Array [
@@ -486,6 +494,7 @@ exports[`Shift Roster Page should render correctly when solving 1`] = `
       options={
         Array [
           Object {
+            "heavyDuty": false,
             "id": 2,
             "name": "Spot",
             "requiredSkillSet": Array [
@@ -500,6 +509,7 @@ exports[`Shift Roster Page should render correctly when solving 1`] = `
             "version": 0,
           },
           Object {
+            "heavyDuty": false,
             "id": 111,
             "name": "New Spot",
             "requiredSkillSet": Array [
@@ -517,6 +527,7 @@ exports[`Shift Roster Page should render correctly when solving 1`] = `
       }
       value={
         Object {
+          "heavyDuty": false,
           "id": 2,
           "name": "Spot",
           "requiredSkillSet": Array [
@@ -647,6 +658,7 @@ exports[`Shift Roster Page should render correctly when solving 1`] = `
           "rotationViolationPenaltyList": Array [],
           "shiftEmployeeConflictList": Array [],
           "spot": Object {
+            "heavyDuty": false,
             "id": 2,
             "name": "Spot",
             "requiredSkillSet": Array [
