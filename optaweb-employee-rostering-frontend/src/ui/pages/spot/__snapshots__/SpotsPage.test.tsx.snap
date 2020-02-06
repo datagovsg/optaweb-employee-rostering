@@ -140,7 +140,7 @@ exports[`Spots page should render correctly with a few spots 1`] = `
                 editor={
                   <Checkbox
                     className=""
-                    id="avoidBackToBackShifts"
+                    id="heavyDuty"
                     isChecked={false}
                     isDisabled={false}
                     isValid={true}
@@ -334,7 +334,7 @@ exports[`Spots page should render correctly with a few spots 1`] = `
                 editor={
                   <Checkbox
                     className=""
-                    id="avoidBackToBackShifts"
+                    id="heavyDuty"
                     isChecked={false}
                     isDisabled={false}
                     isValid={true}
@@ -583,7 +583,7 @@ exports[`Spots page should render the editor correctly 1`] = `
   >
     <Checkbox
       className=""
-      id="avoidBackToBackShifts"
+      id="heavyDuty"
       isChecked={false}
       isDisabled={false}
       isValid={true}
