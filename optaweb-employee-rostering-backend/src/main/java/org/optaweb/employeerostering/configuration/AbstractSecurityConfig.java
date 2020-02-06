@@ -20,11 +20,12 @@ class MockSecurityConfig extends AbstractSecurityConfig {
     protected void configure (HttpSecurity httpSecurity) throws Exception {
         logger.info("Configuring security for DEVELOPMENT.");
 
-        // Necessary only for H2 database console in development
         httpSecurity
                 .headers().frameOptions().disable();
         httpSecurity
                 .csrf().disable();
+
+        // Necessary only for H2 database console in development
         httpSecurity
                 .authorizeRequests()
                 .antMatchers("/h2-console/**", "/login/**")
@@ -45,7 +46,10 @@ class ProductionSecurityConfig extends AbstractSecurityConfig {
     @Override
     protected void configure (HttpSecurity httpSecurity) throws Exception {
         logger.info("Configuring security for PRODUCTION.");
-
+        httpSecurity
+            .headers().frameOptions().disable();
+        httpSecurity
+            .csrf().disable();
         // TODO: discern which routes need to be protected in the application
         httpSecurity.authorizeRequests()
                 .antMatchers("/**").permitAll()
