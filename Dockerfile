@@ -14,9 +14,15 @@
 
 # This is a multi-staged Dockerfile that uses Maven builder image to build the whole project with Maven.
 # In the second phase, the standalone Spring Boot executable JAR is placed into an OpenJDK JRE image.
-# Example usage:
+#
+# Build an image:
 # docker build -t optaweb/employee-rostering .
-# docker run -p 8080:8080 --rm -it -e SPRING_PROFILES_ACTIVE=dev optaweb/employee-rostering
+#
+# Run the image with default profile (using in-memory H2 database):
+# docker run -p 8080:8080 --rm -it optaweb/employee-rostering
+#
+# Run the image with production profile (using PostgreSQL database):
+# docker run -p 8080:8080 --rm -it -e SPRING_PROFILES_ACTIVE=production optaweb/employee-rostering
 
 FROM adoptopenjdk/maven-openjdk8:latest as builder
 WORKDIR /usr/src/optaweb
@@ -25,6 +31,6 @@ RUN mvn clean install -DskipTests
 
 FROM adoptopenjdk/openjdk8:ubi-minimal-jre
 RUN mkdir /opt/app
-COPY --from=builder /usr/src/optaweb/employee-rostering-standalone/target/*-exec.jar /opt/app/optaweb-employee-rostering.jar
+COPY --from=builder /usr/src/optaweb/optaweb-employee-rostering-standalone/target/*-exec.jar /opt/app/optaweb-employee-rostering.jar
 CMD ["java", "-jar", "/opt/app/optaweb-employee-rostering.jar"]
 EXPOSE 8080

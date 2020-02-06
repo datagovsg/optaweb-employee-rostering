@@ -1,6 +1,9 @@
 package org.optaweb.employeerostering.configuration;
 
+import java.io.InputStream;
+
 import javax.mail.MessagingException;
+import javax.mail.Session;
 import javax.mail.internet.MimeMessage;
 
 import org.apache.commons.mail.util.MimeMessageParser;
@@ -14,14 +17,14 @@ import org.springframework.mail.MailParseException;
 import org.springframework.mail.MailPreparationException;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessagePreparator;
+
 
 @Configuration
 public class EmailConfig {
 
     @Bean
-    @Profile({ Profiles.TEST, Profiles.DEVELOPMENT })
+    @Profile({ Profiles.TEST, Profiles.DEVELOPMENT, Profiles.STAGING })
     public JavaMailSender getMailSender() {
         return new PrintScreenMailSender();
     }
@@ -30,7 +33,7 @@ public class EmailConfig {
 /**
  * A mail sender that simply prints the contents of the email to the screen on send.
  */
-class PrintScreenMailSender extends JavaMailSenderImpl {
+class PrintScreenMailSender implements JavaMailSender {
     private static final Logger logger = LoggerFactory.getLogger(PrintScreenMailSender.class);
 
     private void print (MimeMessage m) {
@@ -52,6 +55,21 @@ class PrintScreenMailSender extends JavaMailSenderImpl {
 
     private void print (SimpleMailMessage m) {
         System.out.println(m.toString());
+    }
+
+    @Override
+    public MimeMessage createMimeMessage() {
+        return new MimeMessage((Session) null);
+    }
+
+    @Override
+    public MimeMessage createMimeMessage(InputStream contentStream) throws MailParseException {
+        try {
+            return new MimeMessage(null, contentStream);
+        }
+        catch (MessagingException ex) {
+            throw new MailParseException("Could not parse raw MIME content", ex);
+        }
     }
 
     @Override
