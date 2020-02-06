@@ -113,7 +113,7 @@ describe('Spot operations', () => {
     const { store, client } = mockStore(state);
     const tenantId = store.getState().tenantData.currentTenantId;
 
-    const spotToAdd: Spot = { tenantId, name: 'New Spot', requiredSkillSet: [], heavyDuty: false, };
+    const spotToAdd: Spot = { tenantId, name: 'New Spot', requiredSkillSet: [], heavyDuty: false };
     const spotWithUpdatedId: Spot = { ...spotToAdd, id: 4, version: 0 };
     onPost(`/tenant/${tenantId}/spot/add`, spotToAdd, spotWithUpdatedId);
     await store.dispatch(spotOperations.addSpot(spotToAdd));
@@ -129,7 +129,14 @@ describe('Spot operations', () => {
     const { store, client } = mockStore(state);
     const tenantId = store.getState().tenantData.currentTenantId;
 
-    const spotToUpdate: Spot = { tenantId, name: 'Updated Spot', id: 4, version: 0, requiredSkillSet: [], heavyDuty: false, };
+    const spotToUpdate: Spot = {
+      tenantId,
+      name: 'Updated Spot',
+      id: 4,
+      version: 0,
+      requiredSkillSet: [],
+      heavyDuty: false,
+    };
     const spotWithUpdatedVersion: Spot = { ...spotToUpdate, version: 1 };
     onPost(`/tenant/${tenantId}/spot/update`, spotToUpdate, spotWithUpdatedVersion);
     await store.dispatch(spotOperations.updateSpot(spotToUpdate));
@@ -143,9 +150,30 @@ describe('Spot operations', () => {
 });
 
 describe('Spot reducers', () => {
-  const addedSpot: Spot = { tenantId: 0, id: 4321, version: 0, name: 'Spot 1', requiredSkillSet: [], heavyDuty: false, };
-  const updatedSpot: Spot = { tenantId: 0, id: 1234, version: 1, name: 'Updated Spot 2', requiredSkillSet: [], heavyDuty: false, };
-  const deletedSpot: Spot = { tenantId: 0, id: 2312, version: 0, name: 'Spot 3', requiredSkillSet: [], heavyDuty: false, };
+  const addedSpot: Spot = {
+    tenantId: 0,
+    id: 4321,
+    version: 0,
+    name: 'Spot 1',
+    requiredSkillSet: [],
+    heavyDuty: false,
+  };
+  const updatedSpot: Spot = {
+    tenantId: 0,
+    id: 1234,
+    version: 1,
+    name: 'Updated Spot 2',
+    requiredSkillSet: [],
+    heavyDuty: false,
+  };
+  const deletedSpot: Spot = {
+    tenantId: 0,
+    id: 2312,
+    version: 0,
+    name: 'Spot 3',
+    requiredSkillSet: [],
+    heavyDuty: false,
+  };
   it('set loading', () => {
     expect(
       reducer(state.spotList, actions.setIsSpotListLoading(true)),
@@ -197,6 +225,7 @@ describe('Spot selectors', () => {
       id: 1234,
       version: 1,
       name: 'Spot 2',
+      heavyDuty: false,
       requiredSkillSet: [
         {
           tenantId: 0,
@@ -229,6 +258,7 @@ describe('Spot selectors', () => {
         id: 1234,
         version: 1,
         name: 'Spot 2',
+        heavyDuty: false,
         requiredSkillSet: [
           {
             tenantId: 0,
@@ -244,6 +274,7 @@ describe('Spot selectors', () => {
         version: 0,
         name: 'Spot 3',
         requiredSkillSet: [],
+        heavyDuty: false,
       },
     ]));
     expect(spotList.length).toEqual(2);

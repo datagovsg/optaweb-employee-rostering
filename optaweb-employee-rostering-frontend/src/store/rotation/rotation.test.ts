@@ -299,6 +299,7 @@ describe('Rotation selectors', () => {
         version: 0,
         name: 'Spot',
         requiredSkillSet: [],
+        heavyDuty: false,
       },
       rotationEmployee: null,
       durationBetweenRotationStartAndTemplateStart: moment.duration('PT3D'),
@@ -342,6 +343,7 @@ describe('Rotation selectors', () => {
           version: 0,
           name: 'Spot',
           requiredSkillSet: [],
+          heavyDuty: false,
         },
         rotationEmployee: null,
         durationBetweenRotationStartAndTemplateStart: moment.duration('PT3D'),
@@ -357,6 +359,7 @@ describe('Rotation selectors', () => {
           version: 0,
           name: 'Spot',
           requiredSkillSet: [],
+          heavyDuty: false,
         },
         rotationEmployee: {
           tenantId: 0,
