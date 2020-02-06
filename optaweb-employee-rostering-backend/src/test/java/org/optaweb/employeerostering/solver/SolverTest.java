@@ -154,7 +154,7 @@ public class SolverTest {
         Employee employeeB = new Employee(TENANT_ID, "Bill", contract, Collections.singleton(skill));
         employeeB.setId(idGenerator.getAndIncrement());
 
-        Spot spotA = new Spot(TENANT_ID, "Spot", Collections.singleton(skill));
+        Spot spotA = new Spot(TENANT_ID, "Spot", Collections.singleton(skill), false);
         spotA.setId(idGenerator.getAndIncrement());
 
         OffsetDateTime firstDateTime = OffsetDateTime.of(rosterState.getFirstPublishedDate().atTime(9, 0),
@@ -202,7 +202,7 @@ public class SolverTest {
         Employee employeeA = new Employee(TENANT_ID, "Bill", contract, Collections.emptySet());
 
         employeeA.setId(idGenerator.getAndIncrement());
-        Spot spotA = new Spot(TENANT_ID, "Spot", Collections.emptySet());
+        Spot spotA = new Spot(TENANT_ID, "Spot", Collections.emptySet(), false);
         spotA.setId(idGenerator.getAndIncrement());
 
         LocalDate firstDayOfWeek = START_DATE.with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY));
@@ -272,7 +272,7 @@ public class SolverTest {
         skillA.setId(idGenerator.getAndIncrement());
         skillB.setId(idGenerator.getAndIncrement());
 
-        Spot spotA = new Spot(TENANT_ID, "Spot A", new HashSet<>(Arrays.asList(skillA, skillB)));
+        Spot spotA = new Spot(TENANT_ID, "Spot A", new HashSet<>(Arrays.asList(skillA, skillB)), false);
         spotA.setId(idGenerator.getAndIncrement());
 
         Contract contract = getDefaultContract(idGenerator);
@@ -326,7 +326,7 @@ public class SolverTest {
         Employee employeeA = new Employee(TENANT_ID, "Bill", contract, Collections.emptySet());
         employeeA.setId(idGenerator.getAndIncrement());
 
-        Spot spotA = new Spot(TENANT_ID, "Spot", Collections.emptySet());
+        Spot spotA = new Spot(TENANT_ID, "Spot", Collections.emptySet(), false);
         spotA.setId(idGenerator.getAndIncrement());
 
         OffsetDateTime firstDateTime = OffsetDateTime.of(START_DATE, LocalTime.MIDNIGHT, ZoneOffset.UTC);
@@ -410,7 +410,7 @@ public class SolverTest {
         Employee employeeA = new Employee(TENANT_ID, "Bill", contract, Collections.emptySet());
         employeeA.setId(idGenerator.getAndIncrement());
 
-        Spot spotA = new Spot(TENANT_ID, "Spot", Collections.emptySet());
+        Spot spotA = new Spot(TENANT_ID, "Spot", Collections.emptySet(), false);
         spotA.setId(idGenerator.getAndIncrement());
 
         OffsetDateTime firstDateTime = OffsetDateTime.of(START_DATE, LocalTime.MIDNIGHT, ZoneOffset.UTC);
@@ -469,7 +469,7 @@ public class SolverTest {
         Employee employeeA = new Employee(TENANT_ID, "Bill", contract, Collections.emptySet());
         employeeA.setId(idGenerator.getAndIncrement());
 
-        Spot spotA = new Spot(TENANT_ID, "Spot", Collections.emptySet());
+        Spot spotA = new Spot(TENANT_ID, "Spot", Collections.emptySet(), false);
         spotA.setId(idGenerator.getAndIncrement());
 
         OffsetDateTime firstDateTime = OffsetDateTime.of(START_DATE, LocalTime.MIDNIGHT, ZoneOffset.UTC);
@@ -537,7 +537,7 @@ public class SolverTest {
         Employee employeeA = new Employee(TENANT_ID, "Bill", contract, Collections.emptySet());
         employeeA.setId(idGenerator.getAndIncrement());
 
-        Spot spotA = new Spot(TENANT_ID, "Spot", Collections.emptySet());
+        Spot spotA = new Spot(TENANT_ID, "Spot", Collections.emptySet(), false);
         spotA.setId(idGenerator.getAndIncrement());
 
         OffsetDateTime firstDateTime = OffsetDateTime.of(START_DATE, LocalTime.MIDNIGHT, ZoneOffset.UTC);
@@ -587,7 +587,7 @@ public class SolverTest {
         RosterState rosterState = getRosterState(idGenerator);
         RosterParametrization rosterParametrization = getRosterParametrization(idGenerator);
 
-        Spot spotA = new Spot(TENANT_ID, "Spot A", Collections.emptySet());
+        Spot spotA = new Spot(TENANT_ID, "Spot A", Collections.emptySet(), false);
         spotA.setId(idGenerator.getAndIncrement());
 
         Contract contract = getDefaultContract(idGenerator);

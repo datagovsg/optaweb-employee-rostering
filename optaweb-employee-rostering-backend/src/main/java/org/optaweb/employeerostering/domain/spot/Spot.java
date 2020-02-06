@@ -50,14 +50,18 @@ public class Spot extends AbstractPersistable {
     )
     private Set<Skill> requiredSkillSet;
 
+    @NotNull
+    private Boolean avoidBackToBackShifts;
+
     @SuppressWarnings("unused")
     public Spot() {
     }
 
-    public Spot(Integer tenantId, String name, Set<Skill> requiredSkillSet) {
+    public Spot(Integer tenantId, String name, Set<Skill> requiredSkillSet, Boolean avoidBackToBackShifts) {
         super(tenantId);
         this.name = name;
         this.requiredSkillSet = requiredSkillSet;
+        this.avoidBackToBackShifts = avoidBackToBackShifts;
     }
 
     @Override
@@ -83,5 +87,11 @@ public class Spot extends AbstractPersistable {
 
     public void setRequiredSkillSet(Set<Skill> requiredSkillSet) {
         this.requiredSkillSet = requiredSkillSet;
+    }
+
+    public Boolean getAvoidBackToBackShifts() { return avoidBackToBackShifts; }
+
+    public void setAvoidBackToBackShifts(Boolean avoidBackToBackShifts) {
+        this.avoidBackToBackShifts = avoidBackToBackShifts;
     }
 }

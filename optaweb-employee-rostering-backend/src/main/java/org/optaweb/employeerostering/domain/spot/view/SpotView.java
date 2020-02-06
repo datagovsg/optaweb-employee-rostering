@@ -64,4 +64,6 @@ public class SpotView extends AbstractPersistable {
     public void setRequiredSkillSet(Set<Skill> requiredSkillSet) {
         this.requiredSkillSet = requiredSkillSet;
     }
+
+    public Boolean getAvoidBackToBackShifts() { return avoidBackToBackShifts; }
 }
