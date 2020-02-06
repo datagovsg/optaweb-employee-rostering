@@ -41,7 +41,7 @@ const mapStateToProps = (state: AppState, ownProps: Props): StateProps => ({
   columnTitles: [
     ownProps.t('name'),
     ownProps.t('requiredSkillSet'),
-    ownProps.t('avoidBackToBackShifts'),
+    ownProps.t('heavyDuty'),
   ],
   tableData: spotSelectors.getSpotList(state),
   skillList: skillSelectors.getSkillList(state),
@@ -83,7 +83,7 @@ export class SpotsPage extends DataTable<Spot, Props> {
           </Chip>
         ))}
       </ChipGroup>,
-      data.avoidBackToBackShifts
+      data.heavyDuty
         ? <Text key={0}>Yes</Text>
         : <Text key={0}>No</Text>,
     ];
@@ -92,7 +92,7 @@ export class SpotsPage extends DataTable<Spot, Props> {
   getInitialStateForNewRow(): Partial<Spot> {
     return {
       requiredSkillSet: [],
-      avoidBackToBackShifts: false,
+      heavyDuty: false,
     };
   }
 
@@ -114,10 +114,10 @@ export class SpotsPage extends DataTable<Spot, Props> {
         onChange={selected => setProperty('requiredSkillSet', selected)}
       />,
       <Checkbox
-        id="avoidBackToBackShifts"
+        id="heavyDuty"
         key={2}
-        isChecked={data.avoidBackToBackShifts}
-        onChange={checked => setProperty('avoidBackToBackShifts', checked)}
+        isChecked={data.heavyDuty}
+        onChange={checked => setProperty('heavyDuty', checked)}
       />,
     ];
   }

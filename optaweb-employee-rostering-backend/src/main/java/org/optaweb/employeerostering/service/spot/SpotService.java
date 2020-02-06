@@ -43,7 +43,7 @@ public class SpotService extends AbstractRestService {
             tenantId,
             spotView.getName(),
             spotView.getRequiredSkillSet(),
-            spotView.getAvoidBackToBackShifts()
+            spotView.getHeavyDuty()
         );
         spot.setId(spotView.getId());
         spot.setVersion(spotView.getVersion());

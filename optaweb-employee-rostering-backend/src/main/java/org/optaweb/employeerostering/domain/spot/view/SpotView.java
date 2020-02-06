@@ -27,17 +27,17 @@ public class SpotView extends AbstractPersistable {
 
     private Set<Skill> requiredSkillSet;
 
-    private Boolean avoidBackToBackShifts;
+    private Boolean heavyDuty;
 
     @SuppressWarnings("unused")
     public SpotView() {
     }
 
-    public SpotView(Integer tenantId, String name, Set<Skill> requiredSkillSet, Boolean avoidBackToBackShifts) {
+    public SpotView(Integer tenantId, String name, Set<Skill> requiredSkillSet, Boolean heavyDuty) {
         super(tenantId);
         this.name = name;
         this.requiredSkillSet = requiredSkillSet;
-        this.avoidBackToBackShifts = avoidBackToBackShifts;
+        this.heavyDuty = heavyDuty;
     }
 
     @Override
@@ -65,5 +65,5 @@ public class SpotView extends AbstractPersistable {
         this.requiredSkillSet = requiredSkillSet;
     }
 
-    public Boolean getAvoidBackToBackShifts() { return avoidBackToBackShifts; }
+    public Boolean getHeavyDuty () { return heavyDuty; }
 }
