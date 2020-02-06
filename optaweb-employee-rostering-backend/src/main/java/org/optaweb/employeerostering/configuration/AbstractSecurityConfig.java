@@ -38,7 +38,7 @@ class MockSecurityConfig extends AbstractSecurityConfig {
 }
 
 @EnableWebSecurity
-@Profile(Profiles.PRODUCTION)
+@Profile({Profiles.STAGING, Profiles.PRODUCTION})
 class ProductionSecurityConfig extends AbstractSecurityConfig {
     private static final Logger logger = LoggerFactory.getLogger(Profiles.class);
 
