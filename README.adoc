@@ -1,21 +1,6 @@
-= Employee Rostering Optimization as a Service
+= ctrl-shift
 
-image:https://sonarcloud.io/api/project_badges/measure?project=optaweb-employee-rostering&metric=alert_status[
-"Quality Gate Status", link="https://sonarcloud.io/dashboard?id=optaweb-employee-rostering"]
-image:https://sonarcloud.io/api/project_badges/measure?project=optaweb-employee-rostering&metric=reliability_rating[
-"Reliability Rating", link="https://sonarcloud.io/dashboard?id=optaweb-employee-rostering"]
-image:https://sonarcloud.io/api/project_badges/measure?project=optaweb-employee-rostering&metric=security_rating[
-"Security Rating", link="https://sonarcloud.io/dashboard?id=optaweb-employee-rostering"]
-image:https://sonarcloud.io/api/project_badges/measure?project=optaweb-employee-rostering&metric=sqale_rating[
-"Maintainability Rating", link="https://sonarcloud.io/dashboard?id=optaweb-employee-rostering"]
-image:https://sonarcloud.io/api/project_badges/measure?project=optaweb-employee-rostering&metric=ncloc[
-"Lines of Code", link="https://sonarcloud.io/dashboard?id=optaweb-employee-rostering"]
-image:https://sonarcloud.io/api/project_badges/measure?project=optaweb-employee-rostering&metric=coverage[
-"Coverage", link="https://sonarcloud.io/dashboard?id=optaweb-employee-rostering"]
-
-An end-to-end https://www.optaplanner.org/[OptaPlanner] web application ready to deploy on https://www.openshift.com/[OpenShift 4].
-
-See https://www.youtube.com/watch?v=sOWC4qrXxFk[the video demo].
+An automated rostering service powered by https://www.optaplanner.org/[OptaPlanner]
 
 == Quick Start
 
@@ -23,8 +8,8 @@ Install Docker and run the following on the command line:
 
 [source,shell]
 ----
-docker build -t rostering .
-docker run -p 8080:8080 --rm -it -e SPRING_PROFILES_ACTIVE=dev rostering
+docker build -t ctrl-shift-standalone .
+docker run -p 8080:8080 --rm -it -e SPRING_PROFILES_ACTIVE=dev ctrl-shift-standalone
 ----
 This takes a few minutes on the first time. The application will be automatically populated with test data.
 
