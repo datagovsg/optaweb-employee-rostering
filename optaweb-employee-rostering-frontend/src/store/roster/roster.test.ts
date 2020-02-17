@@ -28,6 +28,7 @@ import DomainObjectView from 'domain/DomainObjectView';
 import { RosterState } from 'domain/RosterState';
 import { serializeLocalDate } from 'store/rest/DataSerialization';
 import { flushPromises } from 'setupTests';
+import { doNothing } from 'types';
 import { availabilityRosterReducer } from './reducers';
 import { rosterStateReducer, shiftRosterViewReducer, rosterSelectors, rosterOperations, solverReducer } from './index';
 import * as actions from './actions';
@@ -181,7 +182,7 @@ const mockAvailabilityRoster: AvailabilityRosterView = {
 describe('Roster operations', () => {
   it('should dispatch actions and call client on solve roster', async () => {
     const mockRefreshShiftRoster = jest.spyOn(rosterOperations, 'refreshShiftRoster')
-      .mockImplementation(() => () => {});
+      .mockImplementation(() => doNothing);
     jest.useFakeTimers();
     const solvingStartTime = moment('2018-01-01', 'YYYY-MM-DD').toDate();
     MockDate.set(solvingStartTime);
@@ -213,7 +214,7 @@ describe('Roster operations', () => {
     const { store, client } = mockStore(state);
     const tenantId = store.getState().tenantData.currentTenantId;
     const mockRefreshShiftRoster = jest.spyOn(rosterOperations, 'refreshShiftRoster')
-      .mockImplementation(() => () => {});
+      .mockImplementation(() => doNothing);
 
     onPost(`/tenant/${tenantId}/roster/terminate`, {}, {});
     await (store.dispatch(rosterOperations.terminateSolvingRosterEarly()));
@@ -442,7 +443,7 @@ describe('Roster operations', () => {
     const { store, client } = mockStore(state);
     const tenantId = store.getState().tenantData.currentTenantId;
     const mockRefreshShiftRoster = jest.spyOn(rosterOperations, 'refreshShiftRoster')
-      .mockImplementation(() => () => {});
+      .mockImplementation(() => doNothing);
 
     onPost(`/tenant/${tenantId}/roster/publishAndProvision`, {}, {
       publishedFromDate: '2018-01-01',

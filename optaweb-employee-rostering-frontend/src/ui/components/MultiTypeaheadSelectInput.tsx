@@ -14,8 +14,7 @@
  * limitations under the License.
  */
 import React from 'react';
-import { Select, SelectOption, SelectVariant } from '@patternfly/react-core';
-import { stringFilter } from 'util/CommonFilters';
+import Select from 'react-select';
 
 export interface MultiTypeaheadSelectProps<T> {
   emptyText: string;
@@ -23,6 +22,9 @@ export interface MultiTypeaheadSelectProps<T> {
   value: T[];
   optionToStringMap: (option: T) => string;
   onChange: (selected: T[]) => void;
+  optional?: boolean;
+  noClearButton?: boolean;
+  autoSize?: boolean;
 }
 
 export interface MultiTypeaheadSelectState {
@@ -42,90 +44,62 @@ const StatefulMultiTypeaheadSelectInput: React.FC<MultiTypeaheadSelectProps<any>
 
 export { StatefulMultiTypeaheadSelectInput };
 
-export const substringFilter = (props: MultiTypeaheadSelectProps<any>) => (e: React.ChangeEvent<HTMLInputElement>) => {
-  const filter = stringFilter((child: any) => child.props.value)(e.target.value);
-  const options = props.options.map(option => (
-    <SelectOption
-      isDisabled={false}
-      key={props.optionToStringMap(option)}
-      value={props.optionToStringMap(option)}
-    />
-  ));
-  const typeaheadFilteredChildren = e.target.value !== ''
-    ? options.filter(filter)
-    : options;
-  return typeaheadFilteredChildren;
-};
-
-export default class MultiTypeaheadSelectInput<T> extends React.Component<MultiTypeaheadSelectProps<T>,
-MultiTypeaheadSelectState> {
+export default class MultiTypeaheadSelectInput<T> extends React.Component<
+MultiTypeaheadSelectProps<T>
+> {
   constructor(props: MultiTypeaheadSelectProps<T>) {
     super(props);
-
-    this.onToggle = this.onToggle.bind(this);
     this.onSelect = this.onSelect.bind(this);
-    this.clearSelection = this.clearSelection.bind(this);
-
-    this.state = {
-      isExpanded: false,
-    };
   }
 
-  onToggle(isExpanded: boolean) {
-    this.setState({
-      isExpanded,
-    });
-  }
-
-  onSelect(event: any, selection: string) {
-    const selected = this.props.value;
-    const selectedOption = this.props.options.find(option => this.props.optionToStringMap(option) === selection) as T;
-    if (selected.map(this.props.optionToStringMap).includes(selection)) {
-      this.props.onChange(this.props.value.filter(option => this.props.optionToStringMap(option) !== selection));
+  onSelect(selections: { value: T }[]|null) {
+    if (selections !== null) {
+      this.props.onChange(selections.map(s => s.value));
     } else {
-      this.props.onChange([...this.props.value, selectedOption]);
+      this.props.onChange([]);
     }
   }
 
-  clearSelection() {
-    this.setState({
-      isExpanded: false,
-    });
-    this.props.onChange([]);
-  }
-
   render() {
-    const { isExpanded } = this.state;
-    const selected = this.props.value;
-    const titleId = 'multi-typeahead-select-id';
-    const { emptyText } = this.props;
-    const selections = selected.map(this.props.optionToStringMap);
+    const { optionToStringMap, emptyText, optional, options, autoSize } = this.props;
+    const selectOptions = this.props.options.map(o => ({ value: o }));
+    // Why map to string first?
+    // Clone of objects are not the same, and sometimes we are passed
+    // clones instead of the real thing, and "===" and "==" are
+    // both identity/is comparators on objects, so we compare their
+    // "toString" values to check for equality
+    const selected = selectOptions.filter(o => this.props.value
+      .find(item => optionToStringMap(item) === optionToStringMap(o.value)) !== undefined);
+    const parentStyle: React.CSSProperties = {
+      position: 'relative',
+    };
+    if (autoSize === undefined || autoSize) {
+      const maxLabelLength = Math.max(emptyText.length, ...options.map(optionToStringMap).map(s => s.length));
+      parentStyle.width = `${maxLabelLength + 2}em`;
+    }
 
     return (
-      <div>
-        <span id={titleId} hidden>
-          {emptyText}
-        </span>
+      <div style={parentStyle}>
         <Select
-          variant={SelectVariant.typeaheadMulti}
           aria-label={emptyText}
-          onToggle={this.onToggle}
-          onSelect={this.onSelect as any}
-          onClear={this.clearSelection}
-          onFilter={substringFilter(this.props)}
-          selections={selections}
-          isExpanded={isExpanded}
-          ariaLabelledBy={titleId}
-          placeholderText={emptyText}
-        >
-          {this.props.options.map(option => (
-            <SelectOption
-              isDisabled={false}
-              key={this.props.optionToStringMap(option)}
-              value={this.props.optionToStringMap(option)}
-            />
-          ))}
-        </Select>
+          styles={{
+            menuPortal: provided => ({
+              ...provided,
+              zIndex: 9999999,
+            }),
+          }}
+          onChange={this.onSelect}
+          defaultValue={selected}
+          value={selected}
+          selected={selected}
+          placeholder={emptyText}
+          getOptionLabel={o => optionToStringMap(o.value)}
+          getOptionValue={o => optionToStringMap(o.value)}
+          options={selectOptions}
+          menuPortalTarget={document.body}
+          isMulti
+          isClearable={optional}
+        />
       </div>
     );
   }

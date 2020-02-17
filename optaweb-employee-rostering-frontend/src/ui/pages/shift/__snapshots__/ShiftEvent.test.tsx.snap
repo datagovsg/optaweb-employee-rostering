@@ -5577,7 +5577,7 @@ exports[`ShiftEvent should render ShiftPopupHeader correctly 1`] = `
   <Text>
     Spot, 9:00 AM-5:00 PM: Employee 1
   </Text>
-  <Button
+  <Component
     onClick={[Function]}
     variant="link"
   >
@@ -5587,8 +5587,8 @@ exports[`ShiftEvent should render ShiftPopupHeader correctly 1`] = `
       size="sm"
       title={null}
     />
-  </Button>
-  <Button
+  </Component>
+  <Component
     onClick={[Function]}
     variant="link"
   >
@@ -5598,6 +5598,6 @@ exports[`ShiftEvent should render ShiftPopupHeader correctly 1`] = `
       size="sm"
       title={null}
     />
-  </Button>
+  </Component>
 </span>
 `;

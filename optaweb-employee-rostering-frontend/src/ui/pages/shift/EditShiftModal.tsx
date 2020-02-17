@@ -100,6 +100,7 @@ export class EditShiftModal extends React.Component<Props & WithTranslation, Sta
   render() {
     const { t } = this.props;
     const dateFormat = 'MMMM dd, hh:mm a';
+
     return (
       <Modal
         title={this.props.shift ? t('editShift') : t('createShift')}
@@ -175,11 +176,12 @@ export class EditShiftModal extends React.Component<Props & WithTranslation, Sta
               emptyText={t('unassigned')}
               value={(this.state.editedValue.employee !== null)
                 ? this.state.editedValue.employee : undefined}
-              options={[undefined, ...this.props.employeeList]}
+              options={this.props.employeeList}
               optionToStringMap={employee => (employee ? employee.name : t('unassigned'))}
               onChange={employee => this.setState(prevState => ({
                 editedValue: { ...prevState.editedValue, employee: (employee !== undefined) ? employee : null },
               }))}
+              optional
             />
           </InputGroup>
           <InputGroup>
@@ -189,11 +191,12 @@ export class EditShiftModal extends React.Component<Props & WithTranslation, Sta
               emptyText={t('none')}
               value={(this.state.editedValue.rotationEmployee !== null)
                 ? this.state.editedValue.rotationEmployee : undefined}
-              options={[undefined, ...this.props.employeeList]}
+              options={this.props.employeeList}
               optionToStringMap={employee => (employee ? employee.name : t('none'))}
               onChange={employee => this.setState(prevState => ({
                 editedValue: { ...prevState.editedValue, rotationEmployee: (employee !== undefined) ? employee : null },
               }))}
+              optional
             />
           </InputGroup>
           <InputGroup>
