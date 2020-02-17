@@ -258,6 +258,7 @@ exports[`Availability Roster Page should render correctly when creating a new av
             "rotationViolationPenaltyList": Array [],
             "shiftEmployeeConflictList": Array [],
             "spot": Object {
+              "heavyDuty": false,
               "id": 2,
               "name": "Spot",
               "requiredSkillSet": Array [
@@ -555,6 +556,7 @@ exports[`Availability Roster Page should render correctly when loaded 1`] = `
             "rotationViolationPenaltyList": Array [],
             "shiftEmployeeConflictList": Array [],
             "spot": Object {
+              "heavyDuty": false,
               "id": 2,
               "name": "Spot",
               "requiredSkillSet": Array [
@@ -880,6 +882,7 @@ exports[`Availability Roster Page should render correctly when solving 1`] = `
             "rotationViolationPenaltyList": Array [],
             "shiftEmployeeConflictList": Array [],
             "spot": Object {
+              "heavyDuty": false,
               "id": 2,
               "name": "Spot",
               "requiredSkillSet": Array [

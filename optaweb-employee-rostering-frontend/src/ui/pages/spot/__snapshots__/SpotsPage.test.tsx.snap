@@ -125,6 +125,26 @@ exports[`Spots page should render correctly with a few spots 1`] = `
             Object {
               "title": <EditableComponent
                 editor={
+                  <Checkbox
+                    className=""
+                    id="heavyDuty"
+                    isChecked={false}
+                    isDisabled={false}
+                    isValid={true}
+                    onChange={[Function]}
+                  />
+                }
+                isEditing={false}
+                viewer={
+                  <Text>
+                    No
+                  </Text>
+                }
+              />,
+            },
+            Object {
+              "title": <EditableComponent
+                editor={
                   <span
                     style={
                       Object {
@@ -277,6 +297,26 @@ exports[`Spots page should render correctly with a few spots 1`] = `
                       Skill 2
                     </Unknown>
                   </ChipGroup>
+                }
+              />,
+            },
+            Object {
+              "title": <EditableComponent
+                editor={
+                  <Checkbox
+                    className=""
+                    id="heavyDuty"
+                    isChecked={false}
+                    isDisabled={false}
+                    isValid={true}
+                    onChange={[Function]}
+                  />
+                }
+                isEditing={false}
+                viewer={
+                  <Text>
+                    No
+                  </Text>
                 }
               />,
             },
@@ -492,6 +532,19 @@ exports[`Spots page should render the editor correctly 1`] = `
       }
     />
   </td>
+  <td
+    key="2"
+  >
+    <Checkbox
+      className=""
+      id="heavyDuty"
+      isChecked={false}
+      isDisabled={false}
+      isValid={true}
+      key="2"
+      onChange={[Function]}
+    />
+  </td>
 </tr>
 `;
 
@@ -531,6 +584,15 @@ exports[`Spots page should render the viewer correctly 1`] = `
         Skill 2
       </Component>
     </ChipGroup>
+  </td>
+  <td
+    key="2"
+  >
+    <Text
+      key="0"
+    >
+      No
+    </Text>
   </td>
 </tr>
 `;

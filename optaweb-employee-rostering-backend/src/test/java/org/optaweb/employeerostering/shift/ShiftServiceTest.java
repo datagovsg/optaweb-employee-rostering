@@ -77,7 +77,7 @@ public class ShiftServiceTest extends AbstractEntityRequireTenantRestServiceTest
     private EmployeeService employeeService;
 
     private Spot createSpot(Integer tenantId, String name) {
-        SpotView spotView = new SpotView(tenantId, name, Collections.emptySet());
+        SpotView spotView = new SpotView(tenantId, name, Collections.emptySet(), false);
         return spotService.createSpot(tenantId, spotView);
     }
 

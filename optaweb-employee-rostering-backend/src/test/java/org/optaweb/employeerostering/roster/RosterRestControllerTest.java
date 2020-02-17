@@ -160,7 +160,7 @@ public class RosterRestControllerTest extends AbstractEntityRequireTenantRestSer
     }
 
     private Spot addSpot(String name) {
-        SpotView spotView = new SpotView(TENANT_ID, name, Collections.emptySet());
+        SpotView spotView = new SpotView(TENANT_ID, name, Collections.emptySet(), false);
         return restTemplate.postForEntity(spotPathURI + "add", spotView, Spot.class, TENANT_ID).getBody();
     }
 

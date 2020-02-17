@@ -103,7 +103,7 @@ public class ShiftRestControllerTest extends AbstractEntityRequireTenantRestServ
     @Test
     public void shiftCrudTest() {
         ResponseEntity<Spot> spotResponseEntity = addSpot(TENANT_ID, new SpotView(TENANT_ID, "spot",
-                Collections.emptySet()));
+                Collections.emptySet(), false));
         Spot spot = spotResponseEntity.getBody();
 
         ResponseEntity<Contract> contractResponseEntity = addContract(TENANT_ID, new Contract(TENANT_ID, "contract"));
