@@ -13,70 +13,6 @@ docker run -p 8080:8080 --rm -it -e SPRING_PROFILES_ACTIVE=dev ctrl-shift-standa
 ----
 This takes a few minutes on the first time. The application will be automatically populated with test data.
 
-== Development
-
-
-=== Backend
-
-==== Set up OpenJDK Java 8
-
-[source,shell]
-----
-$ brew tap AdoptOpenJDK/openjdk
-$ brew cask install adoptopenjdk8
-$ java -version
-openjdk version "1.8.0_232"
-OpenJDK Runtime Environment (AdoptOpenJDK)(build 1.8.0_232-b09)
-OpenJDK 64-Bit Server VM (AdoptOpenJDK)(build 25.232-b09, mixed mode)
-$ which java
-/usr/bin/java
-----
-
-==== Add the following line to `~/.bash_profile`
-
-[source,shell]
-----
-export JAVA_HOME="/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home"
-----
-
-==== Configure your IDE
-
-Configure your IDE to use OpenJDK 1.8 and run the main class, which is in
-`org.optaweb.employeerostering.OptaWebEmployeeRosteringApplication` in `employee-rostering-backend` repository.
-
-You will need to specify this program argument for Spring Boot to run in development mode and provision the H2 in-memory database:
-
-`--spring.profiles.active=dev`
-
-=== Email server
-You will need a local SMTP server to receive emails containing the one-time password.
-
-[source,shell]
-----
-# Start
-$ sudo postfix start
-
-# Stop
-$ sudo postfix stop
-
-# Status
-$ sudo postfix status
-----
-
-=== Frontend
-Run `npm install` and then `npm start` in the `employee-rostering-frontend` directory.
-
-
-
-=== Inserting an Agency
-
-Run the following SQL statement to insert a new agency for logging in.
-
-[source,sql]
-----
-insert into agency ( email_domain , name ) values ('open.gov.sg', 'Open Government Products');
-----
-
 == Building
 
 Build the project with maven in the project's root directory:
@@ -133,9 +69,63 @@ config file for the benchmarker changes to be applied.
 Refer to the https://docs.optaplanner.org/latestFinal/optaplanner-docs/html_single/index.html#benchmarker[OptaPlanner
  Docs] for more information on benchmark tweaking.
 
-== Others
+== Development
+
+=== Set up OpenJDK Java 8
+
+[source,shell]
+----
+$ brew tap AdoptOpenJDK/openjdk
+$ brew cask install adoptopenjdk8
+$ java -version
+openjdk version "1.8.0_232"
+OpenJDK Runtime Environment (AdoptOpenJDK)(build 1.8.0_232-b09)
+OpenJDK 64-Bit Server VM (AdoptOpenJDK)(build 25.232-b09, mixed mode)
+$ which java
+/usr/bin/java
+----
+
+==== Add the following line to `~/.bash_profile`
+
+[source,shell]
+----
+export JAVA_HOME="/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home"
+----
 
 === Code formatter
 
-Both IntelliJ and Eclipse formatters are available here:
+Both IntelliJ and Eclipse formatters are available here:  
 https://github.com/kiegroup/droolsjbpm-build-bootstrap/tree/master/ide-configuration
+
+=== Backend
+
+Configure your IDE to run the main class, which is in
+`org.optaweb.employeerostering.OptaWebEmployeeRosteringApplication` in `optaweb-employee-rostering-backend` repository.
+
+=== Frontend
+
+Run `npm install` and then `npm start` in the `optaweb-employee-rostering-frontend` directory.
+
+=== Email server
+You will need a local SMTP server to receive emails containing the one-time password.
+
+[source,shell]
+----
+# Start
+$ sudo postfix start
+
+# Stop
+$ sudo postfix stop
+
+# Status
+$ sudo postfix status
+----
+
+=== Inserting an Agency
+
+Run the following SQL statement to insert a new agency for logging in.
+
+[source,sql]
+----
+insert into agency ( email_domain , name ) values ('open.gov.sg', 'Open Government Products');
+----
