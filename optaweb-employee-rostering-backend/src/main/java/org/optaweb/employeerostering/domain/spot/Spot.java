@@ -89,9 +89,11 @@ public class Spot extends AbstractPersistable {
         this.requiredSkillSet = requiredSkillSet;
     }
 
-    public Boolean getHeavyDuty () { return heavyDuty; }
+    public Boolean getHeavyDuty() {
+        return heavyDuty;
+    }
 
-    public void setHeavyDuty (Boolean heavyDuty) {
+    public void setHeavyDuty(Boolean heavyDuty) {
         this.heavyDuty = heavyDuty;
     }
 }
