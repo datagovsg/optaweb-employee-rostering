@@ -99,6 +99,7 @@ public class SpotService extends AbstractRestService {
 
         oldSpot.setName(newSpot.getName());
         oldSpot.setRequiredSkillSet(newSpot.getRequiredSkillSet());
+        oldSpot.setHeavyDuty(newSpot.getHeavyDuty());
         return spotRepository.save(oldSpot);
     }
 }
