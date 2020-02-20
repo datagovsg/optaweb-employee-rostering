@@ -18,50 +18,65 @@ import React from 'react';
 import DatePicker from '@wojtekmaj/react-daterange-picker';
 import moment from 'moment';
 import { HistoryIcon } from '@patternfly/react-icons';
-import './WeekPicker.css';
-import { Button, ButtonVariant } from '@patternfly/react-core';
+import './IntervalPicker.css';
+import { Button, ButtonVariant, InputGroup } from '@patternfly/react-core';
 
-export interface WeekPickerProps {
+export interface IntervalPickerProps {
   value: Date;
-  onChange: (weekStartDate: Date, weekEndDate: Date) => void;
+  interval: 'day' | 'week' | 'month';
+  onChange: (intervalStartDate: Date, intervalEndDate: Date) => void;
+  onIntervalChange: (interval: 'day' | 'week' | 'month') => void;
 }
 
-export interface WeekPickerState {
+export interface IntervalPickerState {
   isOpen: boolean;
+  interval: 'day' | 'week' | 'month';
 }
 
-function getFirstDayInWeek(dateInWeek: Date): Date {
-  return moment(dateInWeek).startOf('week').toDate();
+function getDaysInInterval(dateInInterval: Date, interval: 'day' | 'week' | 'month'): Date[] {
+  const dateMoment = moment(dateInInterval);
+  return [
+    dateMoment.startOf(interval).toDate(),
+    dateMoment.endOf(interval).toDate(),
+  ];
 }
 
-function getLastDayInWeek(dateInWeek: Date): Date {
-  return moment(dateInWeek).endOf('week').toDate();
-}
-
-export default class WeekPicker extends React.Component<WeekPickerProps, WeekPickerState> {
-  constructor(props: WeekPickerProps) {
+export default class IntervalPicker extends React.Component<IntervalPickerProps, IntervalPickerState> {
+  constructor(props: IntervalPickerProps) {
     super(props);
-    this.state = { isOpen: false };
+    this.state = {
+      isOpen: false,
+      interval: props.interval,
+    };
   }
 
-  goToCurrentWeek() {
-    this.props.onChange(getFirstDayInWeek(new Date()), getLastDayInWeek(new Date()));
+  goToCurrentInterval() {
+    this.goToIntervalContaining(new Date());
+  }
+
+  goToIntervalContaining(date: Date) {
+    const [firstDay, lastDay] = getDaysInInterval(date, this.state.interval);
+    this.props.onChange(firstDay, lastDay);
     this.setState({ isOpen: false });
   }
 
-  goToWeekContaining(date: Date) {
-    this.props.onChange(getFirstDayInWeek(date), getLastDayInWeek(date));
-    this.setState({ isOpen: false });
+  switchIntervalTo(interval: 'day' | 'week' | 'month') {
+    this.setState({ interval });
+    const [firstDay, lastDay] = getDaysInInterval(this.props.value, interval);
+    this.props.onChange(firstDay, lastDay);
+    this.props.onIntervalChange(interval);
   }
 
   render() {
     const locale = moment.locale();
     return (
-      <div className="week-picker-container">
+      <div className="interval-picker-container">
         <Button
-          aria-label="Previous Week"
+          aria-label="Previous Interval"
           variant={ButtonVariant.plain}
-          onClick={() => this.goToWeekContaining(moment(this.props.value).subtract(1, 'w').toDate())}
+          onClick={
+            () => this.goToIntervalContaining(moment(this.props.value).subtract(1, this.state.interval).toDate())
+          }
         >
           <svg
             fill="currentColor"
@@ -83,14 +98,14 @@ export default class WeekPicker extends React.Component<WeekPickerProps, WeekPic
           </svg>
         </Button>
         <DatePicker
-          className="week-picker"
+          className="interval-picker"
           locale={
             /* moment intreprets "en" as "en-US", this intreprets "en" as "en-GB" */
             locale === 'en' ? 'en-US' : locale
           }
-          value={[getFirstDayInWeek(this.props.value), getLastDayInWeek(this.props.value)]}
-          onChange={() => this.goToCurrentWeek()}
-          onClickDay={(value: Date) => this.goToWeekContaining(value)}
+          value={getDaysInInterval(this.props.value, this.state.interval)}
+          onChange={() => this.goToCurrentInterval()}
+          onClickDay={(value: Date) => this.goToIntervalContaining(value)}
           onCalendarOpen={() => this.setState({ isOpen: true })}
           onCalendarClose={() => this.setState({ isOpen: false })}
           isOpen={this.state.isOpen}
@@ -98,9 +113,9 @@ export default class WeekPicker extends React.Component<WeekPickerProps, WeekPic
           required
         />
         <Button
-          aria-label="Next Week"
+          aria-label="Next Interval"
           variant={ButtonVariant.plain}
-          onClick={() => this.goToWeekContaining(moment(this.props.value).add(1, 'w').toDate())}
+          onClick={() => this.goToIntervalContaining(moment(this.props.value).add(1, this.state.interval).toDate())}
         >
           <svg
             fill="currentColor"
@@ -121,6 +136,29 @@ export default class WeekPicker extends React.Component<WeekPickerProps, WeekPic
             />
           </svg>
         </Button>
+        <InputGroup className="interval-picker-toggle">
+          <Button
+            aria-label="Day"
+            variant={this.state.interval === 'day' ? 'primary' : 'tertiary'}
+            onClick={() => this.switchIntervalTo('day')}
+          >
+            Day
+          </Button>
+          <Button
+            aria-label="Week"
+            variant={this.state.interval === 'week' ? 'primary' : 'tertiary'}
+            onClick={() => this.switchIntervalTo('week')}
+          >
+            Week
+          </Button>
+          <Button
+            aria-label="Month"
+            variant={this.state.interval === 'month' ? 'primary' : 'tertiary'}
+            onClick={() => this.switchIntervalTo('month')}
+          >
+            Month
+          </Button>
+        </InputGroup>
       </div>
     );
   }

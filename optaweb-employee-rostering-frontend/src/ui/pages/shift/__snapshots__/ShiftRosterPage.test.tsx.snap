@@ -71,9 +71,11 @@ exports[`Shift Roster Page should render correctly when creating a new shift via
         }
       }
     />
-    <WeekPicker
-      aria-label="Select Week to View"
+    <IntervalPicker
+      aria-label="Select Interval to View"
+      interval="week"
       onChange={[Function]}
+      onIntervalChange={[Function]}
       value={2018-07-01T00:00:00.000Z}
     />
     <ScoreDisplay
@@ -209,6 +211,7 @@ exports[`Shift Roster Page should render correctly when creating a new shift via
         },
       ]
     }
+    interval="week"
     key="2"
     onAddEvent={[Function]}
     onUpdateEvent={[Function]}
@@ -293,9 +296,11 @@ exports[`Shift Roster Page should render correctly when loaded 1`] = `
         }
       }
     />
-    <WeekPicker
-      aria-label="Select Week to View"
+    <IntervalPicker
+      aria-label="Select Interval to View"
+      interval="week"
       onChange={[Function]}
+      onIntervalChange={[Function]}
       value={2018-07-01T00:00:00.000Z}
     />
     <ScoreDisplay
@@ -431,6 +436,7 @@ exports[`Shift Roster Page should render correctly when loaded 1`] = `
         },
       ]
     }
+    interval="week"
     key="2"
     onAddEvent={[Function]}
     onUpdateEvent={[Function]}
@@ -543,9 +549,11 @@ exports[`Shift Roster Page should render correctly when solving 1`] = `
         }
       }
     />
-    <WeekPicker
-      aria-label="Select Week to View"
+    <IntervalPicker
+      aria-label="Select Interval to View"
+      interval="week"
       onChange={[Function]}
+      onIntervalChange={[Function]}
       value={2018-07-01T00:00:00.000Z}
     />
     <ScoreDisplay
@@ -681,6 +689,7 @@ exports[`Shift Roster Page should render correctly when solving 1`] = `
         },
       ]
     }
+    interval="week"
     key="2"
     onAddEvent={[Function]}
     onUpdateEvent={[Function]}
