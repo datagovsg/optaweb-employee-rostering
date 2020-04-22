@@ -142,6 +142,7 @@ exports[`Edit Shift Modal should render correctly when closed 1`] = `
         options={
           Array [
             Object {
+              "heavyDuty": false,
               "id": 2,
               "name": "Spot",
               "requiredSkillSet": Array [
@@ -395,6 +396,7 @@ exports[`Edit Shift Modal should render correctly when opened 1`] = `
         options={
           Array [
             Object {
+              "heavyDuty": false,
               "id": 2,
               "name": "Spot",
               "requiredSkillSet": Array [
@@ -657,6 +659,7 @@ exports[`Edit Shift Modal should render correctly with a shift when opened 1`] =
         options={
           Array [
             Object {
+              "heavyDuty": false,
               "id": 2,
               "name": "Spot",
               "requiredSkillSet": Array [
@@ -674,6 +677,7 @@ exports[`Edit Shift Modal should render correctly with a shift when opened 1`] =
         }
         value={
           Object {
+            "heavyDuty": false,
             "id": 2,
             "name": "Spot",
             "requiredSkillSet": Array [

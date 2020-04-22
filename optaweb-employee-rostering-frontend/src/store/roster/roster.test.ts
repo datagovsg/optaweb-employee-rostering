@@ -45,6 +45,7 @@ const mockShiftRoster: ShiftRosterView = {
     version: 0,
     name: 'Spot',
     requiredSkillSet: [],
+    heavyDuty: false,
   }],
   employeeList: [
     {
@@ -111,6 +112,7 @@ const mockAvailabilityRoster: AvailabilityRosterView = {
     version: 0,
     name: 'Spot',
     requiredSkillSet: [],
+    heavyDuty: false,
   }],
   employeeList: [
     {
@@ -1052,6 +1054,7 @@ describe('Roster selectors', () => {
       version: 0,
       name: 'Missing Spot',
       requiredSkillSet: [],
+      heavyDuty: false,
     }))
       .toEqual([]);
   });
@@ -1283,6 +1286,7 @@ const state: AppState = {
         version: 0,
         name: 'Spot',
         requiredSkillSet: [],
+        heavyDuty: false,
       },
     ]]),
   },

@@ -39,6 +39,8 @@ public class RosterConstraintConfiguration extends AbstractPersistable {
     private Integer rotationEmployeeMatchWeight = 500;
     @NotNull
     private DayOfWeek weekStartDay = DayOfWeek.MONDAY;
+    @NotNull
+    private Integer heavyDutyBackToBackWeight = 500;
 
     @ConstraintWeight("Required skill for a shift")
     private HardMediumSoftLongScore requiredSkill = HardMediumSoftLongScore.ofHard(100);
@@ -66,6 +68,9 @@ public class RosterConstraintConfiguration extends AbstractPersistable {
     private HardMediumSoftLongScore desiredTimeSlot = HardMediumSoftLongScore.ofSoft(1);
     @ConstraintWeight("Employee is not rotation employee")
     private HardMediumSoftLongScore notRotationEmployee = HardMediumSoftLongScore.ofSoft(1);
+    @ConstraintWeight("No back to back heavy duties within 72 hours of each other")
+    private HardMediumSoftLongScore noBackToBackHeavyDuty = HardMediumSoftLongScore.ofSoft(1);
+    
 
     @SuppressWarnings("unused")
     public RosterConstraintConfiguration() {
@@ -74,12 +79,14 @@ public class RosterConstraintConfiguration extends AbstractPersistable {
 
     public RosterConstraintConfiguration(Integer tenantId,
                                          Integer undesiredTimeSlotWeight, Integer desiredTimeSlotWeight,
-                                         Integer rotationEmployeeMatchWeight, DayOfWeek weekStartDay) {
+                                         Integer rotationEmployeeMatchWeight, DayOfWeek weekStartDay,
+                                         Integer heavyDutyBackToBackWeight) {
         super(tenantId);
         this.undesiredTimeSlotWeight = undesiredTimeSlotWeight;
         this.desiredTimeSlotWeight = desiredTimeSlotWeight;
         this.rotationEmployeeMatchWeight = rotationEmployeeMatchWeight;
         this.weekStartDay = weekStartDay;
+        this.heavyDutyBackToBackWeight = heavyDutyBackToBackWeight;
     }
 
     // ************************************************************************
@@ -116,6 +123,14 @@ public class RosterConstraintConfiguration extends AbstractPersistable {
 
     public void setWeekStartDay(DayOfWeek weekStartDay) {
         this.weekStartDay = weekStartDay;
+    }
+
+    public Integer getHeavyDutyBackToBackWeight () {
+        return heavyDutyBackToBackWeight;
+    }
+
+    public void setHeavyDutyBackToBackWeight (Integer heavyDutyBackToBackWeight) {
+        this.heavyDutyBackToBackWeight = heavyDutyBackToBackWeight;
     }
 
     public HardMediumSoftLongScore getRequiredSkill() {
@@ -212,5 +227,13 @@ public class RosterConstraintConfiguration extends AbstractPersistable {
 
     public void setNotRotationEmployee(HardMediumSoftLongScore notRotationEmployee) {
         this.notRotationEmployee = notRotationEmployee;
+    }
+
+    public HardMediumSoftLongScore getNoBackToBackHeavyDuty() {
+        return noBackToBackHeavyDuty;
+    }
+
+    public void setNoBackToBackHeavyDuty(HardMediumSoftLongScore noBackToBackHeavyDuty) {
+        this.noBackToBackHeavyDuty = noBackToBackHeavyDuty;
     }
 }

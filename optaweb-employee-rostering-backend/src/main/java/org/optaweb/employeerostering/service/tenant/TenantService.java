@@ -176,6 +176,8 @@ public class TenantService extends AbstractRestService {
         oldRosterConstraintConfiguration.setUndesiredTimeSlotWeight(
                 rosterConstraintConfigurationView.getUndesiredTimeSlotWeight());
         oldRosterConstraintConfiguration.setWeekStartDay(rosterConstraintConfigurationView.getWeekStartDay());
+        oldRosterConstraintConfiguration.setHeavyDutyBackToBackWeight(rosterConstraintConfigurationView
+                                                                              .getHeavyDutyBackToBackWeight());
 
         oldRosterConstraintConfiguration.setRequiredSkill(rosterConstraintConfigurationView.getRequiredSkill());
         oldRosterConstraintConfiguration.setUnavailableTimeSlot(rosterConstraintConfigurationView
@@ -199,6 +201,8 @@ public class TenantService extends AbstractRestService {
                                                                     .getDesiredTimeSlot());
         oldRosterConstraintConfiguration.setNotRotationEmployee(rosterConstraintConfigurationView
                                                                         .getNotRotationEmployee());
+        oldRosterConstraintConfiguration.setNoBackToBackHeavyDuty(rosterConstraintConfigurationView
+                                                                        .getNoBackToBackHeavyDuty());
         return rosterConstraintConfigurationRepository.save(oldRosterConstraintConfiguration);
     }
 

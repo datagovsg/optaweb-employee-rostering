@@ -34,6 +34,7 @@ describe('ShiftView operations', () => {
         version: 0,
         name: 'Spot',
         requiredSkillSet: [],
+        heavyDuty: false,
       },
       employee: {
         tenantId: 0,

@@ -27,14 +27,17 @@ public class SpotView extends AbstractPersistable {
 
     private Set<Skill> requiredSkillSet;
 
+    private Boolean heavyDuty;
+
     @SuppressWarnings("unused")
     public SpotView() {
     }
 
-    public SpotView(Integer tenantId, String name, Set<Skill> requiredSkillSet) {
+    public SpotView(Integer tenantId, String name, Set<Skill> requiredSkillSet, Boolean heavyDuty) {
         super(tenantId);
         this.name = name;
         this.requiredSkillSet = requiredSkillSet;
+        this.heavyDuty = heavyDuty;
     }
 
     @Override
@@ -61,4 +64,6 @@ public class SpotView extends AbstractPersistable {
     public void setRequiredSkillSet(Set<Skill> requiredSkillSet) {
         this.requiredSkillSet = requiredSkillSet;
     }
+
+    public Boolean getHeavyDuty () { return heavyDuty; }
 }

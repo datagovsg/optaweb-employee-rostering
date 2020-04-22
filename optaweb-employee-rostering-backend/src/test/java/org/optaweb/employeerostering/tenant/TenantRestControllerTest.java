@@ -108,15 +108,15 @@ public class TenantRestControllerTest extends AbstractEntityRequireTenantRestSer
         ResponseEntity<RosterConstraintConfiguration> getResponse = getRosterConstraintParametrization(TENANT_ID);
         assertThat(getResponse.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(getResponse.getBody()).isNotNull();
-
         ResponseEntity<RosterConstraintConfiguration> updateResponse =
                 updateRosterConstraintParametrization(TENANT_ID, new RosterConstraintConfigurationView(
-                        TENANT_ID, 0, 0, 0, DayOfWeek.TUESDAY));
+                        TENANT_ID, 0, 0, 0, DayOfWeek.TUESDAY, 0));
         assertThat(updateResponse.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(updateResponse.getBody().getDesiredTimeSlotWeight()).isEqualTo(0);
         assertThat(updateResponse.getBody().getRotationEmployeeMatchWeight()).isEqualTo(0);
         assertThat(updateResponse.getBody().getUndesiredTimeSlotWeight()).isEqualTo(0);
         assertThat(updateResponse.getBody().getWeekStartDay()).isEqualTo(DayOfWeek.TUESDAY);
+        assertThat(updateResponse.getBody().getHeavyDutyBackToBackWeight()).isEqualTo(0);
         assertThat(updateResponse.getBody().getRequiredSkill()).isEqualTo(HardMediumSoftLongScore.ofHard(100));
         assertThat(updateResponse.getBody().getUnavailableTimeSlot()).isEqualTo(HardMediumSoftLongScore.ofHard(50));
         assertThat(updateResponse.getBody().getOneShiftPerDay()).isEqualTo(HardMediumSoftLongScore.ofHard(10));
@@ -133,6 +133,7 @@ public class TenantRestControllerTest extends AbstractEntityRequireTenantRestSer
         assertThat(updateResponse.getBody().getUndesiredTimeSlot()).isEqualTo(HardMediumSoftLongScore.ofSoft(1));
         assertThat(updateResponse.getBody().getDesiredTimeSlot()).isEqualTo(HardMediumSoftLongScore.ofSoft(1));
         assertThat(updateResponse.getBody().getNotRotationEmployee()).isEqualTo(HardMediumSoftLongScore.ofSoft(1));
+        assertThat(updateResponse.getBody().getNoBackToBackHeavyDuty()).isEqualTo(HardMediumSoftLongScore.ofSoft(1));
     }
 
     @Test
