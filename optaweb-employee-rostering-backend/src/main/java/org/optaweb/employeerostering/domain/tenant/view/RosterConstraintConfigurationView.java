@@ -105,11 +105,11 @@ public class RosterConstraintConfigurationView extends AbstractPersistable {
         this.weekStartDay = weekStartDay;
     }
 
-    public Integer getHeavyDutyBackToBackWeight () {
+    public Integer getHeavyDutyBackToBackWeight() {
         return heavyDutyBackToBackWeight;
     }
 
-    public void setHeavyDutyBackToBackWeight (Integer heavyDutyBackToBackWeight) {
+    public void setHeavyDutyBackToBackWeight(Integer heavyDutyBackToBackWeight) {
         this.heavyDutyBackToBackWeight = heavyDutyBackToBackWeight;
     }
 

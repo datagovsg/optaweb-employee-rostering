@@ -210,7 +210,7 @@ end
 
 rule "No back to back heavy duties within 72 hours of each other"
     when
-        $rosterParametrization : RosterConstraintConfiguration(heavyDutyBackToBackWeight != 0)
+        $rosterConstraintConfiguration : RosterConstraintConfiguration(heavyDutyBackToBackWeight != 0)
         $s : Shift(
                 employee != null,
                 $e : employee,
@@ -223,23 +223,5 @@ rule "No back to back heavy duties within 72 hours of each other"
             $leftEndDateTime <= endDateTime,
             $leftEndDateTime.until(startDateTime, ChronoUnit.HOURS) < 72)
     then
-        scoreHolder.addSoftConstraintMatch(kcontext, -$rosterParametrization.getHeavyDutyBackToBackWeight());
-end
-
-rule "No back to back heavy duties within 72 hours of each other"
-    when
-        $rosterParametrization : RosterParametrization(heavyDutyBackToBackWeight != 0)
-        $s : Shift(
-                employee != null,
-                $e : employee,
-                spot.getHeavyDuty(),
-                $leftEndDateTime : endDateTime)
-        Shift(
-            employee == $e,
-            this != $s,
-            spot.getHeavyDuty(),
-            $leftEndDateTime <= endDateTime,
-            $leftEndDateTime.until(startDateTime, ChronoUnit.HOURS) < 72)
-    then
-        scoreHolder.addSoftConstraintMatch(kcontext, -$rosterParametrization.getHeavyDutyBackToBackWeight());
+        scoreHolder.addSoftConstraintMatch(kcontext, -$rosterConstraintConfiguration.getHeavyDutyBackToBackWeight());
 end
