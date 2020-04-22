@@ -291,6 +291,7 @@ export abstract class DataTable<T, P extends DataTableProps<T>> extends React.Co
             .concat([{ title: this.getAddButtons(this.state.newRowData) }]),
         },
       ] : [];
+
     const sorters = this.getSorters();
 
     const filteredRows = new Stream(this.props.tableData)
@@ -323,6 +324,7 @@ export abstract class DataTable<T, P extends DataTableProps<T>> extends React.Co
     })).concat([{
       title: '', cellTransforms: [headerCol], props: {}, transforms: undefined,
     }]) as any;
+
     return (
       <>
         <Level

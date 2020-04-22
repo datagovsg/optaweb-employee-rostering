@@ -28,6 +28,7 @@ exports[`Rotation Page should render correctly when creating a new shift templat
         options={
           Array [
             Object {
+              "heavyDuty": false,
               "id": 2,
               "name": "Spot",
               "requiredSkillSet": Array [
@@ -42,6 +43,7 @@ exports[`Rotation Page should render correctly when creating a new shift templat
               "version": 0,
             },
             Object {
+              "heavyDuty": false,
               "id": 111,
               "name": "New Spot",
               "requiredSkillSet": Array [
@@ -59,6 +61,7 @@ exports[`Rotation Page should render correctly when creating a new shift templat
         }
         value={
           Object {
+            "heavyDuty": false,
             "id": 2,
             "name": "Spot",
             "requiredSkillSet": Array [
@@ -164,6 +167,7 @@ exports[`Rotation Page should render correctly when creating a new shift templat
             },
             "shiftTemplateDuration": "PT8H",
             "spot": Object {
+              "heavyDuty": false,
               "id": 2,
               "name": "Spot",
               "requiredSkillSet": Array [
@@ -184,6 +188,7 @@ exports[`Rotation Page should render correctly when creating a new shift templat
         },
       ]
     }
+    interval="week"
     key="2"
     onAddEvent={[Function]}
     onUpdateEvent={[Function]}
@@ -225,6 +230,7 @@ exports[`Rotation Page should render correctly when loaded 1`] = `
         options={
           Array [
             Object {
+              "heavyDuty": false,
               "id": 2,
               "name": "Spot",
               "requiredSkillSet": Array [
@@ -239,6 +245,7 @@ exports[`Rotation Page should render correctly when loaded 1`] = `
               "version": 0,
             },
             Object {
+              "heavyDuty": false,
               "id": 111,
               "name": "New Spot",
               "requiredSkillSet": Array [
@@ -256,6 +263,7 @@ exports[`Rotation Page should render correctly when loaded 1`] = `
         }
         value={
           Object {
+            "heavyDuty": false,
             "id": 2,
             "name": "Spot",
             "requiredSkillSet": Array [
@@ -361,6 +369,7 @@ exports[`Rotation Page should render correctly when loaded 1`] = `
             },
             "shiftTemplateDuration": "PT8H",
             "spot": Object {
+              "heavyDuty": false,
               "id": 2,
               "name": "Spot",
               "requiredSkillSet": Array [
@@ -381,6 +390,7 @@ exports[`Rotation Page should render correctly when loaded 1`] = `
         },
       ]
     }
+    interval="week"
     key="2"
     onAddEvent={[Function]}
     onUpdateEvent={[Function]}

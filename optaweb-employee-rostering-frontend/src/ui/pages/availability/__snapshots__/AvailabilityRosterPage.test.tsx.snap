@@ -98,9 +98,11 @@ exports[`Availability Roster Page should render correctly when creating a new av
         }
       }
     />
-    <WeekPicker
-      aria-label="Select Week to View"
+    <IntervalPicker
+      aria-label="Select Interval to View"
+      interval="week"
       onChange={[Function]}
+      onIntervalChange={[Function]}
       value={2018-07-01T00:00:00.000Z}
     />
     <ScoreDisplay
@@ -258,6 +260,7 @@ exports[`Availability Roster Page should render correctly when creating a new av
             "rotationViolationPenaltyList": Array [],
             "shiftEmployeeConflictList": Array [],
             "spot": Object {
+              "heavyDuty": false,
               "id": 2,
               "name": "Spot",
               "requiredSkillSet": Array [
@@ -283,6 +286,7 @@ exports[`Availability Roster Page should render correctly when creating a new av
         },
       ]
     }
+    interval="week"
     key="4"
     onAddEvent={[Function]}
     onUpdateEvent={[Function]}
@@ -395,9 +399,11 @@ exports[`Availability Roster Page should render correctly when loaded 1`] = `
         }
       }
     />
-    <WeekPicker
-      aria-label="Select Week to View"
+    <IntervalPicker
+      aria-label="Select Interval to View"
+      interval="week"
       onChange={[Function]}
+      onIntervalChange={[Function]}
       value={2018-07-01T00:00:00.000Z}
     />
     <ScoreDisplay
@@ -555,6 +561,7 @@ exports[`Availability Roster Page should render correctly when loaded 1`] = `
             "rotationViolationPenaltyList": Array [],
             "shiftEmployeeConflictList": Array [],
             "spot": Object {
+              "heavyDuty": false,
               "id": 2,
               "name": "Spot",
               "requiredSkillSet": Array [
@@ -580,6 +587,7 @@ exports[`Availability Roster Page should render correctly when loaded 1`] = `
         },
       ]
     }
+    interval="week"
     key="4"
     onAddEvent={[Function]}
     onUpdateEvent={[Function]}
@@ -720,9 +728,11 @@ exports[`Availability Roster Page should render correctly when solving 1`] = `
         }
       }
     />
-    <WeekPicker
-      aria-label="Select Week to View"
+    <IntervalPicker
+      aria-label="Select Interval to View"
+      interval="week"
       onChange={[Function]}
+      onIntervalChange={[Function]}
       value={2018-07-01T00:00:00.000Z}
     />
     <ScoreDisplay
@@ -880,6 +890,7 @@ exports[`Availability Roster Page should render correctly when solving 1`] = `
             "rotationViolationPenaltyList": Array [],
             "shiftEmployeeConflictList": Array [],
             "spot": Object {
+              "heavyDuty": false,
               "id": 2,
               "name": "Spot",
               "requiredSkillSet": Array [
@@ -905,6 +916,7 @@ exports[`Availability Roster Page should render correctly when solving 1`] = `
         },
       ]
     }
+    interval="week"
     key="4"
     onAddEvent={[Function]}
     onUpdateEvent={[Function]}

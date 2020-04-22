@@ -543,7 +543,7 @@ public class RosterGenerator implements ApplicationRunner {
         for (int i = 0; i < size; i++) {
             String name = generatorType.spotNameGenerator.generateNextValue();
             Set<Skill> requiredSkillSet = new HashSet<>(extractRandomSubList(skillList, 0.5, 0.9, 1.0));
-            Spot spot = new Spot(tenantId, name, requiredSkillSet);
+            Spot spot = new Spot(tenantId, name, requiredSkillSet, false);
             entityManager.persist(spot);
             spotList.add(spot);
         }
