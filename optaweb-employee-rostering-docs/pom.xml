@@ -7,7 +7,7 @@
   <parent>
     <groupId>org.optaweb.employeerostering</groupId>
     <artifactId>optaweb-employee-rostering</artifactId>
-    <version>7.34.0-SNAPSHOT</version>
+    <version>7.36.0-SNAPSHOT</version>
   </parent>
 
   <artifactId>optaweb-employee-rostering-docs</artifactId>
@@ -36,7 +36,6 @@
         <plugin>
           <groupId>org.asciidoctor</groupId>
           <artifactId>asciidoctor-maven-plugin</artifactId>
-          <version>1.5.5</version>
           <configuration>
             <imagesDir>.</imagesDir>
             <attributes>
@@ -80,18 +79,6 @@
               </configuration>
             </execution>
           </executions>
-          <dependencies>
-            <dependency>
-              <groupId>org.asciidoctor</groupId>
-              <artifactId>asciidoctorj</artifactId>
-              <version>1.5.5</version>
-            </dependency>
-            <dependency>
-              <groupId>org.asciidoctor</groupId>
-              <artifactId>asciidoctorj-pdf</artifactId>
-              <version>1.5.0-alpha.15</version>
-            </dependency>
-          </dependencies>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
