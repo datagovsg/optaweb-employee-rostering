@@ -108,7 +108,6 @@ public class TenantRestControllerTest extends AbstractEntityRequireTenantRestSer
         ResponseEntity<RosterConstraintConfiguration> getResponse = getRosterConstraintParametrization(TENANT_ID);
         assertThat(getResponse.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(getResponse.getBody()).isNotNull();
-
         ResponseEntity<RosterConstraintConfiguration> updateResponse =
                 updateRosterConstraintParametrization(TENANT_ID, new RosterConstraintConfigurationView(
                         TENANT_ID, 0, 0, 0, DayOfWeek.TUESDAY, 0));
